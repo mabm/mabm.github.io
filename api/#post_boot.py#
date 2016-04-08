@@ -1,0 +1,65 @@
+#!/usr/bin/python
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
+
+import requests
+import urlparse
+
+#BACKEND_URL = "http://powerci.org:9999"
+BACKEND_URL = "http://localhost/powerci/api"
+AUTHORIZATION_TOKEN = "4a92fd31-5283-4079-8458-41d4c2a8e4d6"
+
+def main():
+    headers = {
+        "Authorization": AUTHORIZATION_TOKEN,
+        "Content-Type": "application/json",
+        "Accept": "*/*"
+    }
+
+    payload = {
+        "version": "1.0",
+        "lab_name": "lab-test",
+        "kernel": "next-20161802",
+        "job": "next",
+        "defconfig": "arm-omap2plus_defconfig",
+        "board": "omap4-superPanda3",
+        "boot_result": "PASS",
+        "boot_time": 10.4,
+        "boot_warnings": 1,
+        "endian": "little",
+        "arch": "arm",
+        "power_values": [
+            {
+                "power_max": 42.25,
+                "current_min": 456.6,
+                "current_max": 468.66,
+                "power_min": 18.65,
+                "voltage_max": 485.68,
+                "energy": 585.65,
+                "data": "4sdDX4522Dfd5.csv",
+                "label": "test1"
+            },
+            {
+                "power_max": 42.25,
+                "current_min": 456.6,
+                "current_max": 468.66,
+                "power_min": 18.65,
+                "voltage_max": 485.68,
+                "energy": 895.18,
+                "data": "4fds2d5f41c2v.csv",
+                "label": "test2"
+            }
+        ]
+    }
+
+url = urlparse.urljoin(BACKEND_URL, "/boot")
+response = requests.post(url, data=json.dumps(payload), headers=headers)
+
+print response.content
+
+if __name__ == "__main__":
+    main()
+

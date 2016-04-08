@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.interface.club/limitless/layout_4/LTR/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 15:23:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PowerCI - Power Metrics</title>
+
+	<!-- Global stylesheets -->
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap-tour.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/css/select2.min.css" rel="stylesheet" />
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tour/bootstrap-tour.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/pnotify.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2-rc.1/js/select2.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/jgrowl.min.js"></script>
+	<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/masonry.js"></script>
+	<script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/imagesLoaded.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/extensions/contextmenu.js"></script>
+
+
+
+	<!-- /core JS files -->
+
+	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<!-- optional -->
+	<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/datatables_responsive.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/bootbox.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/charts.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/utils.js"></script>
+
+
+	<!-- /theme JS files -->
+
+</head>
+
+<body>
+	<!-- Main navbar -->
+	<div class="context-panel-menu">
+		<ul class="dropdown-menu">
+			<li><a href="#"><i class="icon-file-minus"></i> Remove</a></li>
+		</ul>
+	</div>
+	<div class="fixedElem text-center">
+		<span id="fixed1">??/?? loaded</span> loaded<br><span id="fixed2">??%</span>
+	</div>
+	<div id="deleteProfil" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h5 class="modal-title">Delete profile</h5>
+				</div>
+
+				<div class="modal-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th class="text-center">Action</th>
+							</tr>
+						</thead>
+						<tbody id="profilTable">
+							
+						</tbody>
+					</table>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" target="_blank" href="http://baylibre.com/"><img src="assets/images/baylibre_logo.png" style="height:181%;margin-top:-9%;" alt=""></a>
+			<a class="navbar-brand" href="powers"><span style="font-size:x-large;margin-left:-25px;">PowerCI</span></a>
+			<a class="navbar-brand" style="display:none"><span class="hpFont" style="font-size:x-large;margin-left:-25px;">Power Oriented continuous Integration Frontend</span></a>
+			<ul class="nav navbar-nav pull-right visible-xs-block">
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+			</ul>
+
+		</div>
+		<div class="navbar-collapse collapse" id="navbar-mobile">
+			<div class="nav navbar-nav navbar-right">
+				<li class="dropdown dropdown-user">
+					<a class="dropdown-toggle" data-toggle="dropdown">
+						<span><i class="fa fa-cog"></i> Settings</span>
+						<i class="caret"></i>
+					</a>
+
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#" id="resetTipsButton"><i class="fa fa-question"></i> &nbsp;Reset tips</a></li>
+						<li><a href="#" id="resetTourButton"><i class="fa fa-magic"></i> Reset Tour</a></li>
+						<li class="divider"></li>
+						<li><a href="#" id="resetAllButton"><i class="fa fa-eraser"></i> Reset all</a></li>
+					</ul>
+				</li>
+				<div class="navbar-brand">
+					Version 0.01
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<!-- /main navbar -->
+
+
+	<!-- Second navbar -->
+<!-- 	<div class="navbar navbar-default" id="navbar-second">
+		<ul class="nav navbar-nav no-border visible-xs-block">
+			<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+		</ul>
+
+		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="powers" style="font-size:large;"><i class="icon-power2 position-left"></i> <b>Power metrics reports</b></a></li>
+				<li class=""><a href="boots"><i class="icon-server position-left"></i> Boots reports</a></li>
+			</ul>
+
+		</div>
+	</div> -->
+	<!-- /second navbar -->
+
+
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4>
+					
+					<div class="display-block" style="width:30%;display:none;" id="tipsMain">
+						<div class="alert alert-success alert-dismissible" role="alert">
+						  <button id="closeTips1" style="margin-right:25px;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	
+						<ul class="custom-bullet" style="font-size:small;font-weight:bold">
+						    <li>The latests results for a given kernel and board config are shown in bold</li>
+						    <li>Hover the Defconfig column to show the full defconfig</li>
+						    <li>The results shown here cover the last 5 days of available data</li>
+						</ul>
+						</div>
+					</div>
+					<div class="display-block" style="width:30%;display:none;" id="tipsCompare">
+						<div class="alert alert-success alert-dismissible" role="alert">
+						  <button id="closeTips2" style="margin-right:25px;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	
+						<ul class="custom-bullet" style="font-size:small;font-weight:bold">
+						    <li>Close the chart [x] to return to search dialog</li>
+						    <li>Click on the links in the x-axis to display the build details</li>
+						    <li>Click on a metrics label to display or hide a chart</li>
+						</ul>
+						</div>
+					</div>
+				</h4>
+				<div id="customSearchBtn" class="heading-elements">
+					<div class="heading-btn-group">
+                    	<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon-cog5 position-left"></i> Custom search criteria <span class="caret"></span></button>
+                    	<ul id="profilList" class="dropdown-menu dropdown-menu-right">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Main charts -->
+				<div class="row" id="compareView">
+					<div class="col-lg-12">
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h6 class="panel-title">Tests Compare</h6>
+								<div class="heading-elements">
+									<ul class="icons-list">
+				                		<li><a id="closeCompareViewBtn"><i class="fa fa-times"></i></a></li>
+				                	</ul>
+			                	</div>
+							<a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+							
+							<div class="panel-body text-center ">
+								<div style="height:1000px" id="compareGraph"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" id="allMainContent">
+					<div class="col-lg-12">
+						<div class="panel panel-flat" id="firstBloc">
+							<div class="panel-body">
+								<div class="container-fluid">
+									<div class="col-lg-12 masonry-container">
+										<div class="col-lg-6">
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Sort by</label>
+													<div class="col-lg-10">
+														<select field="date" id="sort_select" class="select" style="width:100%;height:30px;" tabindex="-1" >
+															<optgroup label="Date">
+																<option value="date_DESC">Newest builds</option>
+																<option value="date_ASC">Oldest builds</option>
+															</optgroup>
+															<optgroup label="Board name">
+																<option value="board_ASC">Alphabetical</option>
+																<option value="board_DESC">Unalphabetical</option>
+															</optgroup>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Tree(s)</label>
+													<div class="col-lg-10">
+														<select field="job" id="select-job" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
+
+														</select>
+														<button id="compareBtn-job" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Kernel(s)</label>
+													<div class="col-lg-10">
+														<select field="kernel" id="select-kernels" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
+
+														</select>
+														<button id="compareBtn-kernel" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Architecture(s)</label>
+													<div class="col-lg-10">
+														<select field="arch" id="select-archs" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
+
+														</select>
+														<button id="compareBtn-arch" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Defconfig(s)</label>
+													<div class="col-lg-10">
+														<select field="defconfig_full" id="select-defconfigs" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
+
+														</select>
+														<button id="compareBtn-defconfig_full" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Board(s)</label>
+													<div class="col-lg-10">
+														<select field="board" id="select-boards" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
+
+														</select>
+														<button id="compareBtn-board" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item" id="tourKPI">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Default KPI</label>
+													<div class="col-lg-10">
+														<select id="default_kpi" class="select" style="width:100%;height:30px;" tabindex="-1" >
+															<option value="energy">Energy (mJ)</option>
+															<option value="power_min">Power Min (mW)</option>
+															<option value="power_avg">Power AVG (mW)</option>
+															<option value="power_max">Power Max (mW)</option>
+															<option value="current_min">Current Min (mA)</option>
+															<option value="current_max">Current Max (mA)</option>
+															<option value="vbus_max">Voltage Max (mV)</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">New result/page</label>
+													<div class="col-lg-10">
+														<select id="page_select" class="select" style="width:100%;height:30px;" tabindex="-1" >
+															<option value="5">5</option>
+															<option selected="selected" value="10">10</option>
+															<option value="15">15</option>
+															<option value="20">20</option>
+															<option value="30">30</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-12 item" id="tourTest">
+												<div class="form-group">
+													<label class="col-lg-2 control-label">Tests</label>
+													<div class="col-lg-10">
+														<select field="test_desc" id="select-test_desc" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
+															
+														</select>
+														<button id="compareBtn-test_desc" class="btn btn-primary compareBtn"><i class="fa fa-bar-chart"></i></button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12 text-center">
+										<br>
+										<button id="searchBtn" style="" class="btn btn-lg btn-success"><i class="fa fa-refresh"></i> Search</button>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="nestedBtn" class="btn btn-default" disabled>Nested view</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+
+						<!-- Traffic sources -->
+						<div class="panel panel-flat">
+							<div class="panel-body">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="table-responsive"> 
+												<table class="table table-hover table-stripec">
+													<thead style="overflow:y;display:none;position:fixed;top:0px;background-color:black;color:white;z-index:9999" id="tableHeaderFixed">
+														<tr>
+															<th id="fc1" class="hidden-md hidden-sm hidden-xs"></th>
+															<th id="fc2">Tree</th>
+															<th id="fc3">Kernel</th>
+															<th id="fc4">Board</th>
+															<th id="fc5">Defconfig</th>
+															<th id="fc6">Test label</th>
+															<th id="fc13" class="dKPITab">Energy (mJ)</th>
+															<th id="fc7" class="hidden-md hidden-sm hidden-xs">Arch</th>
+															<th id="fc8" class="text-center">KPI</th>
+															<th id="fc9" class="text-center">Trend</th>
+															<th id="fc10" class="hidden-md hidden-sm hidden-xs">Lab Name</th>
+															<th id="fc11" class="hidden-md hidden-sm hidden-xs">Date</th>
+															<th id="fc12" class="text-center">Actions</th>
+														</tr>
+													</thead>
+													<thead id="tableHeader">
+														<tr>
+															<th id="c1" class="hidden-md hidden-sm hidden-xs"></th>
+															<th id="c2">Tree</th>
+															<th id="c3">Kernel</th>
+															<th id="c4">Board</th>
+															<th id="c5">Defconfig</th>
+															<th id="c6">Test label</th>
+															<th id="c13" class="dKPITab">Energy (mJ)</th>
+															<th id="c7" class="hidden-md hidden-sm hidden-xs">Arch</th>
+															<th id="c8" class="text-center">KPI</th>
+															<th id="c9" class="text-center">Trend</th>
+															<th id="c10" class="hidden-md hidden-sm hidden-xs">Lab Name</th>
+															<th id="c11" class="hidden-md hidden-sm hidden-xs">Date</th>
+															<th id="c12" class="text-center">Actions</th>
+														</tr>
+													</thead>
+													<tbody id="mainTab">
+														
+													</tbody>
+												</table>
+											</div>
+											<br><br>
+											<div class="loadmore text-center">
+												<p><i class="fa fa-cog fa-spin"></i> Loading ...</p>
+											</div>
+											<div class="more text-center">
+												<button class="more btn btn-sm btn-primary btn-block">More</button>
+											</div>
+											<div id="noResult" class="text-center">
+												<p><i class="fa fa-warning"></i> No result found ...</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /main charts -->
+				</div>
+				<!-- /main content -->
+
+			</div>
+			<!-- /page content -->
+
+		</div>
+		<!-- /page container -->
+
+	</body>
+
+	<script>
+	$(document).ready(function() {
+
+		var page = 1;
+		var load = false;
+		var offset = null;
+		var token = "p4d5d8s4-621f-4a02-80d6-7852a4d5d87z";
+		var APIURL = "http://powerci.org:9999";
+		//var APIURL = "http://192.168.1.177/powerci/api";
+		//var APIURL = "http://localhost/powerci/api";
+		var unitTestMax = 4;
+		var resultPerPage = 10;
+		var canScroll = true;
+		var searchQuery = null;
+		var timeToCheck = 2000;
+		var totalEntry = 0;
+		var checkTimer = null;
+		var total_results = 0;
+
+		var tour = new Tour({
+		  steps: [
+			  {
+			    element: "#tipsMain",
+			    title: "Tips & tour",
+			    content: "This area provides some useful tips and facts. You can make it disappear by clicking the close icon and later reset the tips and tour from the \"Settings\" menu."
+			  },
+			  {
+			    element: "#customSearchBtn",
+			    title: "Search profiles",
+			    placement: "left",
+			    content: "This menu will allow to create a search profile: define your search criteria and click on \"New profile\" to save your choices. You may later recall a profile or delete unused ones."
+			  },
+			  {
+			    element: "#firstBloc",
+			    title: "Search criteria",
+			    placement: "bottom",
+			    content: "This is the crucial interface where you can choose what you wish to search ! Some combinations, like for instance selecting a unique test-case, will allow a \"Compare\" feature. When possible, a blue icon appears that will allow to compute a bargraph to compare the Key Performance Indicator between several boards or kernel configuration for instance."
+			  },
+			  {
+			    element: "#tourKPI",
+			    title: "KEY PERFORMANCE INDICATOR (KPI)",
+			    placement: "left",
+			    content: "Here you can select the default KPI to display when showing results. Nevertheless in most charts, you may freely enable/disable any metrics."
+			  },
+			  {
+			    element: "#tourTest",
+			    title: "Test Cases Selection",
+			    placement: "left",
+			    content: "You can select one or more tests to search, based on a string search in the test description field. When a single test is selected, a blue button appears on the right: you can now compare all results generated for this very test amongst the other criteria! Try it!"
+			  },
+			  {
+			    element: "#compareBtn-test_desc",
+			    title: "Compare button",
+			    placement: "left",
+			    content: "When possible, a blue icon appears that will allow to compute a bargraph to compare the Key Performance Indicator between several boards or kernel configuration for instance."
+			  },
+			  {
+			    element: ".myLine:first",
+			    title: "LATEST RESULT POSTED",
+			    placement: "top",
+			    content: "For a given combination of [kernel-branch + config + device] the latest entry in the data base will show up in bold in the list with an arrow pictogram."
+			  },
+			  {
+			    element: ".selectReg:first",
+			    title: "KPI SELECTION FOR PERFORMANCE TREND MONITORING",
+			    placement: "right",
+			    content: "Here you may select the metric you wish to monitor over different revisions of the kernel sources tested in the same conditions (kernel config, device)."
+			  },
+			  {
+			    element: ".trend:first",
+			    title: "TREND PICTOGRAM",
+			    placement: "left",
+			    content: "This pictogram will show you how this test job compares to its previous execution in the same conditions.<br><br>* Equal: value is unchanged.<br>* Down: value is now lower.<br>* Up : value is now higher.<br>* Dash : first instance of this test, no history yet."
+			  },
+			  {
+			    element: ".details:first",
+			    title: "TEST JOB DETAILS",
+			    placement: "left",
+			    content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle."
+			  },
+			  {
+			    element: ".details:first",
+			    title: "TEST JOB DETAILS",
+			    placement: "left",
+			    content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle.",
+			    	path: "power_details?id=5704d2aefe87c9bd48bbbbab"
+			  },
+			],
+			debug: true,
+			backdrop: true
+		});
+
+		// Initialize the tour
+		showTips('#tipsMain');
+		tour.init();
+
+		// Start the tour
+		//tour.start();
+
+		initMenu(tour);
+
+		Highcharts.setOptions({
+	        lang: {
+	            numericSymbols: null
+	        }
+	    });
+
+		$('#closeTips1').click(function() {
+			localStorage.setItem('powerci_tips', 'no');
+		})
+
+		$('#closeTips2').click(function() {
+			localStorage.setItem('powerci_tips', 'no');
+		})
+
+		$("[id^=compareBtn]").hide();
+		$('#compareView').hide();
+
+		$('.more').click(function() {
+			loadBoots(++page, false, false);
+		})
+
+		$('#nestedBtn').click(function() {
+			if ($(this).hasClass('btn-primary')) {
+				$(this).removeClass('btn-primary');
+				$(this).addClass('btn-default');
+			} else {
+				$(this).addClass('btn-primary');
+				$(this).removeClass('btn-default');
+			}
+			processRequest($('#searchBtn'), true);
+		})
+
+		function getProfils() {
+			var profils = localStorage.getItem('powerci');
+
+			if (profils)
+				return JSON.parse(profils);
+			else
+				return null;
+		}
+
+		function saveProfil(profils) {
+			localStorage.setItem('powerci', JSON.stringify(profils));
+		}
+
+		function getProfil(name) {
+			var profils = getProfils();
+			var profil = null;
+
+			if (profils) {
+				$.each(profils, function(i, elem) {
+					if (elem.name == name)
+						profil = elem;
+				});
+				return profil;
+			}
+			return null;
+		}
+
+		function generateCriterias(generateQuery) {
+			if (generateQuery) {
+				searchQuery = {'sort':{'field': $('#sort_select').val().split("_")[0], 'type':$('#sort_select').val().split("_")[1]}, 'criterias':{}};
+				$("[id^=select-]").each(function(i, elem) {
+					if ($(elem).val())
+						searchQuery.criterias[$(elem).attr('field')] = $(elem).val();
+				});
+			}
+		}
+
+		//$("[id^=compareBtn]").click(function() {
+		$("#compareBtn-test_desc").click(function() {
+			$('#compareGraph').html('<center><br><i class="fa fa-cog fa-spin"></i></center>');
+			$('#allMainContent').hide();
+			$('#compareView').show();
+			//$('#tipsCompare').show();
+			showTips('#tipsCompare');
+			$('#tipsMain').hide();
+			$('#customSearchBtn').hide();
+			generateCriterias(true);
+			$.ajax({
+					method: "PUT",
+					data: JSON.stringify(searchQuery),
+					headers: {
+						"Authorization" :token,
+						"Content-Type" :"application/json"
+					},
+					url: 'http://powerci.org:9999/graph/boot/compare',
+					success: function(data) {
+						elemm = data.result[0];
+						$('#compareGraph').highcharts({
+							chart: {
+				                zoomType: 'x',
+				                renderTo: 'container',
+				                type: elemm.type
+				            },
+					        title: {
+					            text: elemm.title + ' - ' + $('#select-test_desc').val(),
+					            margin: 65,
+					            x: -20 //center
+					        },
+					        xAxis: {
+					            categories: elemm.xAxis,
+					            labels: {
+					            	useHTML: true,
+					            	rotation: -90,
+					            	style: {
+								        "textOverflow": "none"
+								      }
+					            }
+					        },
+					        yAxis: {
+					            title: {
+					                text: elemm.unit
+					            },
+					            plotLines: [{
+					                value: 0,
+					                width: 1,
+					                color: '#808080'
+					            }]
+					        },
+					        legend: {
+					            align: 'center',
+					            verticalAlign: 'top',
+					            floating: true,
+					            x: 0,
+					            y: 30
+					        },
+					        series: elemm.series
+					    });
+					    i = 0;
+					    while (i < $('#compareGraph').highcharts().series.length) {
+					    	if ($('#compareGraph').highcharts().series[i].name != $('#default_kpi option:selected').text())
+					    		$('#compareGraph').highcharts().series[i].hide();
+					    	i++;
+					    }
+					    console.log($('#compareGraph').highcharts().series[0]);
+					}
+			});
+		});
+		$('#closeCompareViewBtn').click(function() {
+			$('#allMainContent').show();
+			$('#compareView').hide();
+			$('#customSearchBtn').show();
+			$('#tipsCompare').hide();
+			showTips('#tipsMain');
+			//$('#tipsMain').show();
+		})
+
+		function displayProfils() {
+			var profils = getProfils();
+
+			$('#profilList').html('');
+			$('#profilTable').html('');
+			if (profils) {
+				$.each(profils, function(i, elem) {
+					$('#profilList').append('<li><a query="'+elem.name+'" class="profilElem"><i class="fa fa-cube"></i>'+elem.name+'</a></li>');
+					$('#profilTable').append('<tr><td>'+elem.name+'</td><td class="text-center"><a query="'+elem.name+'" class="removeProfil"><i class="fa fa-trash"></i> Supprimer</a></td></tr>');
+				});
+			}
+			$('.removeProfil').click(function() {
+				var profils = getProfils();
+
+				if (profils) {
+					var index = -1
+					var i = 0;
+					while (i < profils.length) {
+						if (profils[i].name == $(this).attr('query')) {
+							index = i;
+							break;
+						}
+						i++;
+					}
+					if (index > -1) {
+					    profils.splice(index, 1);
+					    saveProfil(profils);
+					    displayProfils();
+					}
+				}
+			});
+			$('#profilList').append('<li class="divider"></li><li><a id="new_profil"><i class="fa fa-plus"></i> New profile</a></li><li><a data-toggle="modal" data-target="#deleteProfil"><i class="fa fa-sign-out"></i> Delete profiles</a></li>');
+			$('.profilElem').click(function() {
+				searchQuery = JSON.parse(getProfil($(this).attr('query')).query);
+				processRequest($('#searchBtn'), false);
+			});
+			$('#new_profil').click(function() {
+		        bootbox.prompt("Enter profile name", function(result) {
+		            if (result) {
+		            	newProfil(result);
+		            }
+		        });
+			})
+		}
+
+		function newProfil(name) {
+			var profil = {'name':name, 'query':JSON.stringify(searchQuery)};
+			var profils = getProfils();
+
+			if (!profils) {
+				profils = Array(profil);
+			} else {
+				profils.push(profil);
+			}
+			saveProfil(profils);
+			displayProfils();
+		}
+
+		displayProfils();
+
+		$('#page_select').change(function() {
+			resultPerPage = $(this).val();
+		})
+
+		function changeTest(elem, field) {
+			if ($('#' + elem).val() && $('#' + elem).val().length == 1) {
+				$('#compareBtn-' + field).show();
+				$('#' + elem).width('90%');
+				$('#' + elem).parent().find('.select2-container').width('90%');
+			} else {
+				$('#compareBtn-' + field).hide();
+				$('#' + elem).width('100%');
+				$('#' + elem).parent().find('.select2-container').width('100%');
+			}
+		}
+
+		$('[id^=select-]').change(function() {
+			changeTest($(this).attr('id'), $(this).attr('field'));
+		});
+
+		function processRequest(me, generateQuery) {
+			$('#mainTab').html('');
+			if (load) {
+				$(this).effect( "highlight", {color: 'red'}, 400);
+				return;
+			}
+			page = 1;
+			load = false;
+			offset = null;
+			canScroll = true;
+			generateCriterias(generateQuery);
+			me.html('<i class="fa fa-cog fa-spin"></i> Search in progreess ...');
+			totalEntry = 0;
+			if (checkTimer) {
+				clearTimeout(checkTimer);
+				checkTimer = null;
+			}
+			loadBoots(1, false, true);
+		}
+
+		$('#searchBtn').click(function() {
+			processRequest($(this), true);
+		});
+
+		$.ajax({
+			method: "GET",
+			url: APIURL + '/boot/list-content',
+			headers: {
+				"Authorization" : token,
+				"Content-Type" :"application/json"
+			},
+			success: function(data) {
+				searchQuery = {'sort':{'field': 'date', 'type':'DESC'}, 'criterias':{}};
+				searchQuery.criterias['arch'] = Array();
+				$.each(data.result.archs, function(i, elem) {
+					searchQuery.criterias['arch'].push(elem);
+					$('#select-archs').append('<option selected="selected">' + elem + '</option>');
+				});
+				searchQuery.criterias['kernel'] = Array();
+				$.each(data.result.kernels, function(i, elem) {
+					searchQuery.criterias['kernel'].push(elem);
+					$('#select-kernels').append('<option selected="selected">' + elem + '</option>');
+				});
+				searchQuery.criterias['job'] = Array();
+				$.each(data.result.trees, function(i, elem) {
+					searchQuery.criterias['job'].push(elem);
+					$('#select-job').append('<option selected="selected">' + elem + '</option>');
+				});
+				searchQuery.criterias['defconfig_full'] = Array();
+				$.each(data.result.defconfigs, function(i, elem) {
+					searchQuery.criterias['defconfig_full'].push(elem);
+					$('#select-defconfigs').append('<option selected="selected">' + elem + '</option>');
+				});
+				searchQuery.criterias['board'] = Array();
+				$.each(data.result.boards, function(i, elem) {
+					searchQuery.criterias['board'].push(elem);
+					$('#select-boards').append('<option selected="selected">' + elem + '</option>');
+				});
+				searchQuery.criterias['test_desc'] = Array();
+				$.each(data.result.test_desc, function(i, elem) {
+					searchQuery.criterias['test_desc'].push(elem);
+					$('#select-test_desc').append('<option selected="selected">' + elem + '</option>');
+				});
+				generateTab();
+				$(".select-icons").select2();
+				$("[id^=select-]").each(function(i, elem) {
+					changeTest($(elem).attr('id'), $(elem).attr('field'));
+				});
+				total_results = data.result.boots_total;
+				$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
+			}
+		});
+
+		function initInfiniteScroll() {
+			var offset = $('.myLine:last').offset(); 
+	 
+			$(window).scroll(function() {
+				
+				if (isScrolledIntoView("#tableHeader")) {
+					$('#tableHeaderFixed').hide();
+				} else if ($(window).scrollTop() > $('#firstBloc').height()) {
+					$('#tableHeaderFixed').show();
+					$('#tableHeaderFixed').width($('.table-responsive').width());
+				}
+
+				j = 0;
+				while (j < 14) {
+					$('#fc' + j).width($('#c' + j).width());
+					j++;
+				}
+
+				if ((offset.top - $(window).height() <= $(window).scrollTop()) && load == false && 
+					($('.myLine').size() >= 5) && canScroll) {
+						loadBoots(++page, false, false);
+				}
+			});
+		}
+
+		function checkNewEntry() {
+			$.ajax({
+				method: "PUT",
+				data: JSON.stringify(searchQuery),
+				url: APIURL + '/boot/newentry&u=' + totalEntry,
+				headers: {
+					"Authorization" : token,
+					"Content-Type" :"application/json"
+				},
+				success: function(data) {
+					if (data.count != 0) {
+						totalEntry += data.count;
+						console.log('New entry, total = ' + totalEntry);
+						 // Bottom center
+				        $('body').find('.jGrowl').attr('class', '').attr('id', '').hide();
+				        $.jGrowl((data.count) + ' new build(s)', {
+				            position: 'top-right',
+				            theme: 'bg-info',
+				            header: 'New build'
+				        });
+					}
+					checkTimer = setTimeout(checkNewEntry, timeToCheck);
+				}
+			});
+		}
+
+		function loadBoots(page, first, second) {
+			$('#noResult').hide();
+			load = true;
+			$('.loadmore').show();
+			$('.more').hide();
+			$.ajax({
+				method: "PUT",
+				data: JSON.stringify(searchQuery),
+				url: APIURL + '/boot/search?nbr='+resultPerPage+'&p=' + page,
+				headers: {
+					"Authorization" : token,
+					"Content-Type" :"application/json"
+				},
+				success: function(data) {
+					$.each(data.result, function(i, elem) {
+						if (elem.test_plan == "power" && elem.boot_result == "PASS" /* && elem.lastBuild */) {
+							console.log(elem);
+							
+							totalEntry++;
+							var dKPIField = $('#default_kpi').val();
+							var dKPIName = $('#default_kpi option:selected').text();
+							$('.dKPITab').html(dKPIName);
+							var meCumulNRJ = 0;
+							if (!elem.power_stats)
+								return;
+							$.each(elem.power_stats, function(ii, ps) {
+								if (ps[dKPIField] == "00.00")
+									return;
+								meCumulNRJ += eval(ps[dKPIField]);
+								if (ii >= unitTestMax)
+									return false;
+							});
+							$('#mainTab').append('<tr '+((elem.lastBuild) ? 'style="font-weight: bold;"' : '')+' id="'+elem._id.$id+'" class="myLine '+((elem.lastBuild) ? '' : '')+'" ><td class="hidden-md hidden-sm hidden-xs" id="'+elem._id.$id+'"><i class="fa fa-'+((elem.lastBuild) ? 'arrow-right' : 'child')+'"></i></td><td>'+elem.job+'</td><td>'+elem.kernel+'</td><td>'+elem.board+'</td><td><span data-toggle="tooltip" data-placement="top" title="'+elem.defconfig_full+'">'+elem.defconfig+'</span></td><td>'+getFromJson(elem.test_desc)+'</td><td>'+meCumulNRJ+'</td><td class="hidden-md hidden-sm hidden-xs">'+elem.arch+'</td><td class="text-center"><select target="'+elem._id.$id+'" class="selectReg select-'+elem._id.$id+'" class="form-control"> <option value="energy">Energy</option> <option value="power_min">Power Min</option> <option value="power_avg">Power AVG</option> <option value="power_max">Power Max</option> <option value="current_min">Current Min</option> <option value="current_max">Current Max</option> <option value="vbus_max">Voltage Max</option></select></td><td id="'+elem._id.$id+'_reg" class="text-center trend"><i class="fa fa-circle-o-notch fa-spin"></i></td><td class="hidden-md hidden-sm hidden-xs">'+elem.lab_name+'</td><td class="hidden-md hidden-sm hidden-xs">'+moment.unix(elem.date).format("DD/MM/YY HH:mm:ss")+'</td><td class="text-center details"><a href="power_details?id='+elem._id.$id+'"><i class="icon-search4"></i> Details</a></td></tr>');
+							regPicto = '<i class="fa fa-minus"></i>';
+							$('.select-'+elem._id.$id).change(function() {
+								if (!elem.regression || elem.regression.length <= 0)
+									return;
+								regPicto = '<i class="fa fa-minus"></i>';
+								target = $(this).attr('target');
+								$('#'+target+'_reg').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+
+								if (elem.regression[0][$(this).val()] == "GT")
+									regPicto = '<i class="text-success icon-stairs-up"></i>';
+								else if (elem.regression[0][$(this).val()] == 'LT')
+									regPicto = '<i class="text-danger icon-stairs-down"></i>';
+								else if (elem.regression[0][$(this).val()] == 'EQ')
+									regPicto = '<i class="text-warning fa fa-equal"></i>';
+								$('#'+target+'_reg').html(regPicto);
+							})
+							if (elem.regression) {
+								if (elem.regression.length == 0)
+									regPicto = '<i class="text-warning fa fa-question"></i>';
+								else if (elem.regression[0][dKPIField] == "GT")
+									regPicto = '<i class="text-success icon-stairs-up"></i>';
+								else if (elem.regression[0][dKPIField] == 'LT')
+									regPicto = '<i class="text-danger icon-stairs-down"></i>';
+								else if (elem.regression[0][dKPIField] == 'EQ')
+									regPicto = '<i class="text-warning fa fa-equal"></i>';
+							}
+							$('#'+elem._id.$id+'_reg').html(regPicto);
+							$('.selectReg option[value="'+dKPIField+'"]').attr("selected", true);
+						}
+					});
+					$('.myLine').contextmenu({
+				        target: '.context-panel-menu',
+				        onItem: function(context, e) {
+				            var id = $(context).attr('id');
+				            if ($(e.target).text() == " Remove") {
+				            	$('#' + id).hide();
+				            }
+				        }
+				    });
+				    $('#fixed1').html(totalEntry + '/' + total_results);
+				    $('#fixed2').html(Math.round(eval(totalEntry * 100 / total_results)) + '%');
+					j = 0;
+					while (j < 14) {
+						$('#fc' + j).width($('#c' + j).width());
+						j++;
+					}
+					$('[data-toggle="tooltip"]').tooltip()
+					if (first) {
+						initInfiniteScroll();
+					}
+					$('.loadmore').fadeOut(500, function() {
+						$('.more').fadeIn(500);
+					});
+					$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
+					$('.myLine:last').after(data);
+					offset = $('.myLine:last').offset();
+					load = false;
+
+				},
+				error: function(data) {
+					if (checkTimer)
+						clearTimeout(checkTimer);
+					checkTimer = setTimeout(checkNewEntry, timeToCheck);
+					canScroll = false;
+					$('.loadmore').fadeOut(500);
+					$('.more').hide();
+					load = false;
+					if (second) {
+						$('#noResult').show();
+						$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
+					}
+					if (first) {
+						swal({
+							title: "Oops...",
+							text: "Something went wrong!<br>Reason: API is maybe down ?",
+							confirmButtonColor: "#EF5350",
+							html: true,
+							type: "error"
+						});
+					}
+				}
+			});
+		}
+
+		function generateTab() {
+			$('#mainTab').html('');
+			loadBoots(1, true, true);
+
+		}
+		
+	});
+</script>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.interface.club/limitless/layout_4/LTR/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Jan 2016 15:23:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PowerCI - Power Metrics - Details</title>
+
+	<!-- Global stylesheets -->
+	<link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/icons/fontawesome/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/pnotify.min.js"></script>
+
+	<!-- /core JS files -->
+
+	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<!-- optional -->
+	<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+
+	<script type="text/javascript" src="assets/js/core/app.js"></script>
+	<script type="text/javascript" src="assets/js/pages/datatables_responsive.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/bootbox.min.js"></script>
+	<script type="text/javascript" src="assets/js/plugins/notifications/sweet_alert.min.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/charts.js"></script>
+
+	<!-- /theme JS files -->
+
+</head>
+
+<body>
+
+	<!-- Main navbar -->
+	<div class="navbar navbar-inverse">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><img src="assets/images/logo_light.png" alt=""></a>
+
+			<ul class="nav navbar-nav pull-right visible-xs-block">
+				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+			</ul>
+		</div>
+
+		
+	</div>
+	<!-- /main navbar -->
+
+
+	<!-- Second navbar -->
+	<div class="navbar navbar-default" id="navbar-second">
+		<ul class="nav navbar-nav no-border visible-xs-block">
+			<li><a class="text-center collapsed" data-toggle="collapse" data-target="#navbar-second-toggle"><i class="icon-menu7"></i></a></li>
+		</ul>
+
+		<div class="navbar-collapse collapse" id="navbar-second-toggle">
+			<ul class="nav navbar-nav">
+				<li class=""><a href="#"><i class="icon-display4 position-left"></i> Home</a></li>
+				<li class="active"><a href="powers.html"><i class="icon-power2 position-left"></i> Power metrics reports</a></li>
+				<li class=""><a href="boots.html"><i class="icon-server position-left"></i> Boots reports</a></li>
+				<li class=""><a href="info.html"><i class="icon-info3 position-left"></i> Info</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-cog3"></i>
+						<span class="visible-xs-inline-block position-right">Share</span>
+						<span class="caret"></span>
+					</a>
+
+					<ul class="dropdown-menu dropdown-menu-right">
+						<li><a href="#"><i class="icon-user-lock"></i> Account security</a></li>
+						<li><a href="#"><i class="icon-statistics"></i> Analytics</a></li>
+						<li><a href="#"><i class="icon-accessibility"></i> Accessibility</a></li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="icon-gear"></i> All settings</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /second navbar -->
+
+
+	<!-- Page header -->
+	<div class="page-header">
+		<div class="page-header-content">
+			<div class="page-title">
+				<h4>
+					<i class="icon-arrow-right6 position-left"></i>
+					<span class="text-semibold">Reports</span> - Power Metrics
+					<small class="display-block">The results shown here cover the last 5 days of available data</small>
+				</h4>
+			</div>
+
+			<div class="heading-elements">
+				<div class="heading-btn-group">
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
+					<a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page header -->
+
+
+	<!-- Page container -->
+	<div class="page-container">
+
+		<!-- Page content -->
+		<div class="page-content">
+
+			<!-- Main content -->
+			<div class="content-wrapper">
+
+				<!-- Main charts -->
+				<div class="row">
+					<div class="col-lg-12">
+
+						<!-- Traffic sources -->
+						<div class="panel panel-flat">
+							<div class="panel-body">
+								<div class="tabbable">
+									<ul class="nav nav-tabs nav-tabs-solid nav-justified">
+										<li class="active"><a href="#power_reports" data-toggle="tab">Power reports</a></li>
+										<li><a href="#power_stats" data-toggle="tab">Quick Statistics</a></li>
+									</ul>
+
+									<div class="tab-content">
+										<div class="tab-pane active" id="power_reports">
+											<div class="container-fluid">
+												<div class="row">
+													<div class="col-lg-12">
+														<table width="100%" class="table datatable-responsive">
+															<thead>
+																<tr>
+																	<th>Tree</th>
+																	<th>Kernel</th>
+																	<th>Board</th>
+																	<th>Energy (mJ)</th>
+																	<th>Power Min (mW)</th>
+																	<th>Power Max (mW)</th>
+																	<th>Power AVG (mW)</th>
+																	<th class="text-center">Regression</th>
+																	<th>Lab Name</th>
+																	<th>Date</th>
+																	<th class="text-center">Actions</th>
+																</tr>
+															</thead>
+															<tbody id="mainTab">
+																
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="tab-pane" id="power_stats">
+											<div class="chart-container">
+												<center><div class="chart" id="power_main_summary" style="width:90%"></div></center>
+											</div><br><br>
+											<div class="chart-container">
+												<center><div class="chart" id="power_boards_summary" style="width:90%"></div></center>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /main charts -->
+				</div>
+				<!-- /main content -->
+
+			</div>
+			<!-- /page content -->
+
+		</div>
+		<!-- /page container -->
+
+	</body>
+	<script>
+	$(document).ready(function() {
+		function startFake(timeElapsed) {
+			var percent = 0;
+			var notice = new PNotify({
+				text: "New power metrics is processing ...",
+				addclass: 'bg-primary',
+				type: 'info',
+				icon: 'icon-spinner4 spinner',
+				hide: false,
+				buttons: {
+					closer: false,
+					sticker: false
+				},
+				opacity: .9,
+				width: "280px"
+			});
+
+			setTimeout(function() {
+				notice.update({
+					title: false
+				});
+				var interval = setInterval(function() {
+					percent += 2;
+					var options = {
+						text: percent + "% complete."
+					};
+					if (percent >= 100) {
+						window.clearInterval(interval);
+						options.title = "New power metrics !";
+						options.addclass = "bg-success";
+						options.type = "success";
+						options.text = '<h5>Board : omap4-panda-es</h5><button class="btn btn-primary"><i class="icon-search4"></i> View details !</button>';
+						options.hide = true;
+						options.buttons = {
+							closer: true,
+							sticker: true
+						};
+						options.icon = 'icon-new';
+						options.delay = 5000;
+						options.opacity = 1;
+						options.width = PNotify.prototype.options.width;
+					}
+					notice.update(options);
+				}, timeElapsed);
+			}, 4000);
+		};
+
+		$.ajax({
+			method: "GET",
+			url: 'http://powerci.org:8888/boot',
+			headers: {
+				"Authorization" :"3caf9787-2521-4276-ad2e-af2c64d19707",
+				"Content-Type" :"application/json"
+			},
+			success: function(data) {
+				var i = 0;
+				var gDataUsage = {all: Array(), regUp: Array(), regDown: Array(), regEq : Array()};
+				while (i < 12) {
+					gDataUsage.all[i] = 0;
+					gDataUsage.regUp[i] = 0;
+					gDataUsage.regDown[i] = 0;
+					gDataUsage.regEq[i++] = 0;
+				}
+				var gFullDataBoards = Array();
+					$.each(data.result, function(i, elem) {
+						tmpReg = Math.floor(Math.random() * 3) + 1;
+						if (elem.test_plan == "power" && elem.status == "PASS") {
+							$('#mainTab').append('<tr><td>'+elem.job+'</td><td>'+elem.kernel+'</td><td>'+elem.board+'</td><td>'+elem.energy+'</td><td>'+elem.power_min+'</td><td>'+elem.power_max+'</td><td>'+elem.power_avg+'</td><td class="text-center"><i class="'+((tmpReg == 1) ? 'text-danger icon-stairs-down' : ((tmpReg == 2) ? 'text-warning fa fa-equal' : ' text-success icon-stairs-up'))+'"</i></td><td>'+elem.lab_name+'</td><td>'+moment.unix(elem.created_on.$date / 1000).fromNow()+'</td><td class="text-center"><ul class="icons-list"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu9"></i></a><ul class="dropdown-menu dropdown-menu-right"><li><a href="boot_details.html?id='+elem._id.$oid+'"><i class="icon-search4"></i> View Details</a></li><li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li><li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li><li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li></ul></li></ul></td></tr>');
+
+							var idxByMoment = eval(moment.unix(elem.created_on.$date / 1000).format("MM")) - 1;
+							/* Filling object for the regression graph */
+							gDataUsage.all[idxByMoment] += 1;
+							if (tmpReg == 1)
+								gDataUsage.regDown[idxByMoment] += 1;
+							else if (tmpReg == 2)
+								gDataUsage.regEq[idxByMoment] += 1;
+							else 
+								gDataUsage.regUp[idxByMoment] += 1;
+
+							/* Filling obj for the boards usage graph */
+							var isPresent = false;
+							$.each(gFullDataBoards, function(i, subElem) {
+								if (subElem.legend == elem.board) {
+									subElem.data[idxByMoment] += 1;
+									isPresent = true;
+								}
+							});
+							if (!isPresent) {
+								var tmp = Array(), i = 0;
+								while (i < 12)
+									tmp[i++] = 0;
+								tmp[idxByMoment] += 1;
+								gFullDataBoards.push({tabSize: 12, legend: elem.board, data: tmp})
+							}
+						}
+					});
+				$('.datatable-responsive').DataTable();
+				/* Chart for summary */
+				generateGraph({
+					data: [{
+						tabSize: 12, 
+						data: gDataUsage.all,
+						legend: 'Power metrics per day',
+					},
+					{
+						tabSize: 12, 
+						data: gDataUsage.regUp,
+						legend: 'Power metrics with up regression',
+					},
+					{
+						tabSize: 12, 
+						data: gDataUsage.regDown,
+						legend: 'Power metrics with down regression',
+					},
+					{
+						tabSize: 12, 
+						data: gDataUsage.regEq,
+						legend: 'Power metrics with equal regression',
+					},],
+					obj:'#power_main_summary',
+					title: 'Power Metrics usage',
+					yUnit: 'Days',
+					suffixFilename: 'power_metrics_summary',
+					xUnit: 'Month',
+					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                				'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				});
+				generateGraph({
+					data: gFullDataBoards,
+					obj:'#power_boards_summary',
+					title: 'Boards Usage',
+					yUnit: 'Boards',
+					type: 'column',
+					suffixFilename: 'boards_usage_summary',
+					xUnit: 'Month',
+					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                				'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				});
+			},
+			error: function(data) {
+				swal({
+					title: "Oops...",
+					text: "Something went wrong!<br>Reason: API is maybe down ?",
+					confirmButtonColor: "#EF5350",
+					html: true,
+					type: "error"
+				});
+			}
+		});
+
+		/* FAKE CODE FOR SIMULATION */
+		//startFake(20);
+	});
+</script>
+</html>
