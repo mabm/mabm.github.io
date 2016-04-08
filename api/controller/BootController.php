@@ -402,7 +402,6 @@
 					//}
 				}
 				$i++;
-				error_log("ici", 0);
 			}
 
 		   return simpleWrite($array, "Server error.", $array);
