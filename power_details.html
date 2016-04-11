@@ -465,8 +465,9 @@
 							dataType: 'html',
 							url: 'http://powerci.org:8889/attachments/'+ elem.data + '/' + elem.filename,
 							success: function(csv) {
-								$('#graphContainer').append('<div class="col-lg-12"><div id="dynamic-'+unused+'" class="panel panel-flat"><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chart" id="chart-'+unused+'"></div><br><div style="width:50%" id="slider-threshold" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><span style="position:absolute;left:0px;top:7px"><b>Coarse (fast)</b></span> <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.080032%;"></a><span style="position:absolute;right:0px;top:7px"><b>Fine (slow)</b></span></div><span id="sliderVal"></span> buckets</center><br><table class="table"> <tr> <td>Power Min</td><td>Power AVG</td><td>Power Max</td><td>Current Min</td><td>Current Max</td><td>Voltage Max</td><td>Energy</td></tr><tr> <td id="pmin_'+unused+'"></td><td id="pavg_'+unused+'"></td><td id="pmax_'+unused+'"></td><td id="cmin_'+unused+'"></td><td id="cmax_'+unused+'"></td><td id="vmax_'+unused+'"></td><td id="nrj_'+unused+'"></td></tr></table></div></div></div></div></div>');
+								$('#graphContainer').append('<div class="col-lg-12"><div id="dynamic-'+unused+'" class="panel panel-flat"><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chartLoading text-center"><br><br><br><br><br><br><h1>Loading ...</h1></div><div class="chart" id="chart-'+unused+'"></div><br><div style="width:50%" id="slider-threshold" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><span style="position:absolute;left:0px;top:7px"><b>Coarse (fast)</b></span> <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.080032%;"></a><span style="position:absolute;right:0px;top:7px"><b>Fine (slow)</b></span></div><span id="sliderVal"></span> buckets</center><br><table class="table"> <tr> <td>Power Min</td><td>Power AVG</td><td>Power Max</td><td>Current Min</td><td>Current Max</td><td>Voltage Max</td><td>Energy</td></tr><tr> <td id="pmin_'+unused+'"></td><td id="pavg_'+unused+'"></td><td id="pmax_'+unused+'"></td><td id="cmin_'+unused+'"></td><td id="cmax_'+unused+'"></td><td id="vmax_'+unused+'"></td><td id="nrj_'+unused+'"></td></tr></table></div></div></div></div></div>');
 								//console.log('scv '+'http://powerci.org:8080/kernel-ci/attachments/'+ elem.data + '/' + elem.filename+' => ' + csv);
+								$('.chartLoading').hide();
 								Highcharts.setOptions({
 							        lang: {
 							            numericSymbols: null
@@ -531,6 +532,8 @@
 							    });
 							    var chart = new Highcharts.Chart(options);
 							    $('#sliderVal').html(chart.series[0].options.downsample.threshold);
+							    $('.chartLoading').height($('#chart-'+unused).height());
+							    $('.chartLoading').width($('#chart-'+unused).width());
 							    var $slider = $("#slider-threshold").slider({
 							        value: chart.series[0].options.downsample.threshold,
 							        min: 100,
@@ -538,20 +541,20 @@
 							        slide: function(event, ui) {
 							        	$('#sliderVal').html(ui.value);
 							        },
+							        start: function() {
+							        	$('.chartLoading').height($('#chart-'+unused).height());
+							    		$('.chartLoading').width($('#chart-'+unused).width());
+							        	$('.chartLoading').show();
+							        },
 							        change: function( event, ui ) {
-							        	$('#slider-threshold').css('background-color', 'black');
 							        	for (i = 0; i < 4; i++) {
 							        		chart.series[i].options.downsample.threshold = ui.value;
 								            chart.series[i].setData(dataSeries[i]);
 							        	}
-							            $('#slider-threshold').css('background-color', '#eee');
+							        	$('.chartLoading').hide();
 							       }
 							    });
 								$('#chart-'+unused).highcharts().series[0].hide();
-								// $('#chart-'+unused).highcharts().series[0].options.downsample.threshold = 5;
-								// $('#chart-'+unused).highcharts().series[1].options.downsample.threshold = 5;
-								// $('#chart-'+unused).highcharts().series[2].options.downsample.threshold = 5;
-								// $('#chart-'+unused).highcharts().series[3].options.downsample.threshold = 5;
 							},
 							error: function(data) {
 								continueing = false;
