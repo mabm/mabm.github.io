@@ -31,28 +31,7 @@ def main():
         "boot_warnings": 1,
         "endian": "little",
         "arch": "arm",
-        "power_values": [
-            {
-                "power_max": 42.25,
-                "current_min": 456.6,
-                "current_max": 468.66,
-                "power_min": 18.65,
-                "voltage_max": 485.68,
-                "energy": 585.65,
-                "data": "4sdDX4522Dfd5.csv",
-                "label": "test1"
-            },
-            {
-                "power_max": 42.25,
-                "current_min": 456.6,
-                "current_max": 468.66,
-                "power_min": 18.65,
-                "voltage_max": 485.68,
-                "energy": 895.18,
-                "data": "4fds2d5f41c2v.csv",
-                "label": "test2"
-            }
-        ]
+        ""
     }
 
 url = urlparse.urljoin(BACKEND_URL, "/boot")
