@@ -449,124 +449,121 @@
 	<script>
 	$(document).ready(function() {
 
-		var page = 1;
-		var load = false;
-		var offset = null;
-		var token = "p4d5d8s4-621f-4a02-80d6-7852a4d5d87z";
-		var APIURL = "http://powerci.org:9999";
-		//var APIURL = "http://192.168.1.177/powerci/api";
-		//var APIURL = "http://localhost/powerci/api";
-		var unitTestMax = 4;
-		var resultPerPage = 10;
-		var canScroll = true;
-		var searchQuery = null;
+		// var page = 1;
+		// var load = false;
+		// var offset = null;
+		// var token = "p4d5d8s4-621f-4a02-80d6-7852a4d5d87z";
+		// var APIURL = "http://powerci.org:9999";
+		// var resultPerPage = 10;
+		// var canScroll = true;
+		// var searchQuery = null;
 		var timeToCheck = 2000;
-		var totalEntry = 0;
+		// var totalEntry = 0;
 		var checkTimer = null;
-		var total_results = 0;
+		// var total_results = 0;
 
-		var tour = new Tour({
-		  steps: [
-			  {
-			    element: "#tipsMain",
-			    title: "Tips & tour",
-			    content: "This area provides some useful tips and facts. You can make it disappear by clicking the close icon and later reset the tips and tour from the \"Settings\" menu."
-			  },
-			  {
-			    element: "#customSearchBtn",
-			    title: "Search profiles",
-			    placement: "left",
-			    content: "This menu will allow to create a search profile: define your search criteria and click on \"New profile\" to save your choices. You may later recall a profile or delete unused ones."
-			  },
-			  {
-			    element: "#firstBloc",
-			    title: "Search criteria",
-			    placement: "bottom",
-			    content: "This is the crucial interface where you can choose what you wish to search ! Some combinations, like for instance selecting a unique test-case, will allow a \"Compare\" feature. When possible, a blue icon appears that will allow to compute a bargraph to compare the Key Performance Indicator between several boards or kernel configuration for instance."
-			  },
-			  {
-			    element: "#tourKPI",
-			    title: "KEY PERFORMANCE INDICATOR (KPI)",
-			    placement: "left",
-			    content: "Here you can select the default KPI to display when showing results. Nevertheless in most charts, you may freely enable/disable any metrics."
-			  },
-			  {
-			    element: "#tourTest",
-			    title: "Test Cases Selection",
-			    placement: "left",
-			    content: "You can select one or more tests to search, based on a string search in the test description field. When a single test is selected, a blue button appears on the right: you can now compare all results generated for this very test amongst the other criteria! Try it!"
-			  },
-			  {
-			    element: "#compareBtn-test_desc",
-			    title: "Compare button",
-			    placement: "left",
-			    content: "When possible, a blue icon appears that will allow to compute a bargraph to compare the Key Performance Indicator between several boards or kernel configuration for instance."
-			  },
-			  {
-			    element: ".myLine:first",
-			    title: "LATEST RESULT POSTED",
-			    placement: "top",
-			    content: "For a given combination of [kernel-branch + config + device] the latest entry in the data base will show up in bold in the list with an arrow pictogram."
-			  },
-			  {
-			    element: ".selectReg:first",
-			    title: "KPI SELECTION FOR PERFORMANCE TREND MONITORING",
-			    placement: "right",
-			    content: "Here you may select the metric you wish to monitor over different revisions of the kernel sources tested in the same conditions (kernel config, device)."
-			  },
-			  {
-			    element: ".trend:first",
-			    title: "TREND PICTOGRAM",
-			    placement: "left",
-			    content: "This pictogram will show you how this test job compares to its previous execution in the same conditions.<br><br>* Equal: value is unchanged.<br>* Down: value is now lower.<br>* Up : value is now higher.<br>* Dash : first instance of this test, no history yet."
-			  },
-			  {
-			    element: ".details:first",
-			    title: "TEST JOB DETAILS",
-			    placement: "left",
-			    content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle."
-			  },
-			  {
-			    element: ".details:first",
-			    title: "TEST JOB DETAILS",
-			    placement: "left",
-			    content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle.",
-			    	path: "power_details?id=5704d2aefe87c9bd48bbbbab"
-			  },
-			],
-			debug: true,
-			backdrop: true
-		});
+		// var tour = new Tour({
+		//   steps: [
+		// 	  {
+		// 	    element: "#tipsMain",
+		// 	    title: "Tips & tour",
+		// 	    content: "This area provides some useful tips and facts. You can make it disappear by clicking the close icon and later reset the tips and tour from the \"Settings\" menu."
+		// 	  },
+		// 	  {
+		// 	    element: "#customSearchBtn",
+		// 	    title: "Search profiles",
+		// 	    placement: "left",
+		// 	    content: "This menu will allow to create a search profile: define your search criteria and click on \"New profile\" to save your choices. You may later recall a profile or delete unused ones."
+		// 	  },
+		// 	  {
+		// 	    element: "#firstBloc",
+		// 	    title: "Search criteria",
+		// 	    placement: "bottom",
+		// 	    content: "This is the crucial interface where you can choose what you wish to search ! Some combinations, like for instance selecting a unique test-case, will allow a \"Compare\" feature. When possible, a blue icon appears that will allow to compute a bargraph to compare the Key Performance Indicator between several boards or kernel configuration for instance."
+		// 	  },
+		// 	  {
+		// 	    element: "#tourKPI",
+		// 	    title: "KEY PERFORMANCE INDICATOR (KPI)",
+		// 	    placement: "left",
+		// 	    content: "Here you can select the default KPI to display when showing results. Nevertheless in most charts, you may freely enable/disable any metrics."
+		// 	  },
+		// 	  {
+		// 	    element: "#tourTest",
+		// 	    title: "Test Cases Selection",
+		// 	    placement: "left",
+		// 	    content: "You can select one or more tests to search, based on a string search in the test description field. When a single test is selected, a blue button appears on the right: you can now compare all results generated for this very test amongst the other criteria! Try it!"
+		// 	  },
+		// 	  {
+		// 	    element: "#compareBtn-test_desc",
+		// 	    title: "Compare button",
+		// 	    placement: "left",
+		// 	    content: "When possible, a blue icon appears that will allow to compute a bargraph to compare the Key Performance Indicator between several boards or kernel configuration for instance."
+		// 	  },
+		// 	  {
+		// 	    element: ".myLine:first",
+		// 	    title: "LATEST RESULT POSTED",
+		// 	    placement: "top",
+		// 	    content: "For a given combination of [kernel-branch + config + device] the latest entry in the data base will show up in bold in the list with an arrow pictogram."
+		// 	  },
+		// 	  {
+		// 	    element: ".selectReg:first",
+		// 	    title: "KPI SELECTION FOR PERFORMANCE TREND MONITORING",
+		// 	    placement: "right",
+		// 	    content: "Here you may select the metric you wish to monitor over different revisions of the kernel sources tested in the same conditions (kernel config, device)."
+		// 	  },
+		// 	  {
+		// 	    element: ".trend:first",
+		// 	    title: "TREND PICTOGRAM",
+		// 	    placement: "left",
+		// 	    content: "This pictogram will show you how this test job compares to its previous execution in the same conditions.<br><br>* Equal: value is unchanged.<br>* Down: value is now lower.<br>* Up : value is now higher.<br>* Dash : first instance of this test, no history yet."
+		// 	  },
+		// 	  {
+		// 	    element: ".details:first",
+		// 	    title: "TEST JOB DETAILS",
+		// 	    placement: "left",
+		// 	    content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle."
+		// 	  },
+		// 	  {
+		// 	    element: ".details:first",
+		// 	    title: "TEST JOB DETAILS",
+		// 	    placement: "left",
+		// 	    content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle.",
+		// 	    	path: "power_details?id=5704d2aefe87c9bd48bbbbab"
+		// 	  },
+		// 	],
+		// 	debug: true,
+		// 	backdrop: true
+		// });
 
 		// Initialize the tour
-		showTips('#tipsMain');
-		tour.init();
+		// showTips('#tipsMain');
+		// tour.init();
 
 		// Start the tour
 		//tour.start();
 
-		initMenu(tour);
+		// initMenu(tour);
 
-		Highcharts.setOptions({
-	        lang: {
-	            numericSymbols: null
-	        }
-	    });
+		// Highcharts.setOptions({
+	 //        lang: {
+	 //            numericSymbols: null
+	 //        }
+	 //    });
 
-		$('#closeTips1').click(function() {
-			localStorage.setItem('powerci_tips', 'no');
-		})
+		// $('#closeTips1').click(function() {
+		// 	localStorage.setItem('powerci_tips', 'no');
+		// })
 
-		$('#closeTips2').click(function() {
-			localStorage.setItem('powerci_tips', 'no');
-		})
+		// $('#closeTips2').click(function() {
+		// 	localStorage.setItem('powerci_tips', 'no');
+		// })
 
-		$("[id^=compareBtn]").hide();
-		$('#compareView').hide();
+		// $("[id^=compareBtn]").hide();
+		// $('#compareView').hide();
 
-		$('.more').click(function() {
-			loadBoots(++page, false, false);
-		})
+		// $('.more').click(function() {
+		// 	loadBoots(++page, false, false);
+		// })
 
 		$('#nestedBtn').click(function() {
 			if ($(this).hasClass('btn-primary')) {
@@ -579,32 +576,32 @@
 			processRequest($('#searchBtn'), true);
 		})
 
-		function getProfils() {
-			var profils = localStorage.getItem('powerci');
+		// function getProfils() {
+		// 	var profils = localStorage.getItem('powerci');
 
-			if (profils)
-				return JSON.parse(profils);
-			else
-				return null;
-		}
+		// 	if (profils)
+		// 		return JSON.parse(profils);
+		// 	else
+		// 		return null;
+		// }
 
-		function saveProfil(profils) {
-			localStorage.setItem('powerci', JSON.stringify(profils));
-		}
+		// function saveProfil(profils) {
+		// 	localStorage.setItem('powerci', JSON.stringify(profils));
+		// }
 
-		function getProfil(name) {
-			var profils = getProfils();
-			var profil = null;
+		// function getProfil(name) {
+		// 	var profils = getProfils();
+		// 	var profil = null;
 
-			if (profils) {
-				$.each(profils, function(i, elem) {
-					if (elem.name == name)
-						profil = elem;
-				});
-				return profil;
-			}
-			return null;
-		}
+		// 	if (profils) {
+		// 		$.each(profils, function(i, elem) {
+		// 			if (elem.name == name)
+		// 				profil = elem;
+		// 		});
+		// 		return profil;
+		// 	}
+		// 	return null;
+		// }
 
 		var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
 		n = 0;
@@ -652,15 +649,15 @@
 		    }
 		});
 
-		function generateCriterias(generateQuery) {
-			if (generateQuery) {
-				searchQuery = {'sort':{'field': $('#sort_select').val().split("_")[0], 'type':$('#sort_select').val().split("_")[1]}, 'criterias':{}};
-				$("[id^=select-]").each(function(i, elem) {
-					if ($(elem).val())
-						searchQuery.criterias[$(elem).attr('field')] = $(elem).val();
-				});
-			}
-		}
+		// function generateCriterias(generateQuery) {
+		// 	if (generateQuery) {
+		// 		searchQuery = {'sort':{'field': $('#sort_select').val().split("_")[0], 'type':$('#sort_select').val().split("_")[1]}, 'criterias':{}};
+		// 		$("[id^=select-]").each(function(i, elem) {
+		// 			if ($(elem).val())
+		// 				searchQuery.criterias[$(elem).attr('field')] = $(elem).val();
+		// 		});
+		// 	}
+		// }
 
 		//$("[id^=compareBtn]").click(function() {
 		$("#compareBtn-test_desc").click(function() {
@@ -741,69 +738,69 @@
 			//$('#tipsMain').show();
 		})
 
-		function displayProfils() {
-			var profils = getProfils();
+		// function displayProfils() {
+		// 	var profils = getProfils();
 
-			$('#profilList').html('');
-			$('#profilTable').html('');
-			if (profils) {
-				$.each(profils, function(i, elem) {
-					$('#profilList').append('<li><a query="'+elem.name+'" class="profilElem"><i class="fa fa-cube"></i>'+elem.name+'</a></li>');
-					$('#profilTable').append('<tr><td>'+elem.name+'</td><td class="text-center"><a query="'+elem.name+'" class="removeProfil"><i class="fa fa-trash"></i> Supprimer</a></td></tr>');
-				});
-			}
-			$('.removeProfil').click(function() {
-				var profils = getProfils();
+		// 	$('#profilList').html('');
+		// 	$('#profilTable').html('');
+		// 	if (profils) {
+		// 		$.each(profils, function(i, elem) {
+		// 			$('#profilList').append('<li><a query="'+elem.name+'" class="profilElem"><i class="fa fa-cube"></i>'+elem.name+'</a></li>');
+		// 			$('#profilTable').append('<tr><td>'+elem.name+'</td><td class="text-center"><a query="'+elem.name+'" class="removeProfil"><i class="fa fa-trash"></i> Supprimer</a></td></tr>');
+		// 		});
+		// 	}
+		// 	$('.removeProfil').click(function() {
+		// 		var profils = getProfils();
 
-				if (profils) {
-					var index = -1
-					var i = 0;
-					while (i < profils.length) {
-						if (profils[i].name == $(this).attr('query')) {
-							index = i;
-							break;
-						}
-						i++;
-					}
-					if (index > -1) {
-					    profils.splice(index, 1);
-					    saveProfil(profils);
-					    displayProfils();
-					}
-				}
-			});
-			$('#profilList').append('<li class="divider"></li><li><a id="new_profil"><i class="fa fa-plus"></i> New profile</a></li><li><a data-toggle="modal" data-target="#deleteProfil"><i class="fa fa-sign-out"></i> Delete profiles</a></li>');
-			$('.profilElem').click(function() {
-				searchQuery = JSON.parse(getProfil($(this).attr('query')).query);
-				processRequest($('#searchBtn'), false);
-			});
-			$('#new_profil').click(function() {
-		        bootbox.prompt("Enter profile name", function(result) {
-		            if (result) {
-		            	newProfil(result);
-		            }
-		        });
-			})
-		}
+		// 		if (profils) {
+		// 			var index = -1
+		// 			var i = 0;
+		// 			while (i < profils.length) {
+		// 				if (profils[i].name == $(this).attr('query')) {
+		// 					index = i;
+		// 					break;
+		// 				}
+		// 				i++;
+		// 			}
+		// 			if (index > -1) {
+		// 			    profils.splice(index, 1);
+		// 			    saveProfil(profils);
+		// 			    displayProfils();
+		// 			}
+		// 		}
+		// 	});
+		// 	$('#profilList').append('<li class="divider"></li><li><a id="new_profil"><i class="fa fa-plus"></i> New profile</a></li><li><a data-toggle="modal" data-target="#deleteProfil"><i class="fa fa-sign-out"></i> Delete profiles</a></li>');
+		// 	$('.profilElem').click(function() {
+		// 		searchQuery = JSON.parse(getProfil($(this).attr('query')).query);
+		// 		processRequest($('#searchBtn'), false);
+		// 	});
+		// 	$('#new_profil').click(function() {
+		//         bootbox.prompt("Enter profile name", function(result) {
+		//             if (result) {
+		//             	newProfil(result);
+		//             }
+		//         });
+		// 	})
+		// }
 
-		function newProfil(name) {
-			var profil = {'name':name, 'query':JSON.stringify(searchQuery)};
-			var profils = getProfils();
+		// function newProfil(name) {
+		// 	var profil = {'name':name, 'query':JSON.stringify(searchQuery)};
+		// 	var profils = getProfils();
 
-			if (!profils) {
-				profils = Array(profil);
-			} else {
-				profils.push(profil);
-			}
-			saveProfil(profils);
-			displayProfils();
-		}
+		// 	if (!profils) {
+		// 		profils = Array(profil);
+		// 	} else {
+		// 		profils.push(profil);
+		// 	}
+		// 	saveProfil(profils);
+		// 	displayProfils();
+		// }
 
 		displayProfils();
 
-		$('#page_select').change(function() {
-			resultPerPage = $(this).val();
-		})
+		// $('#page_select').change(function() {
+		// 	resultPerPage = $(this).val();
+		// })
 
 		function changeTest(elem, field) {
 			if ($('#' + elem).val() && $('#' + elem).val().length == 1) {
@@ -821,103 +818,103 @@
 			changeTest($(this).attr('id'), $(this).attr('field'));
 		});
 
-		function processRequest(me, generateQuery) {
-			$('#mainTab').html('');
-			if (load) {
-				$(this).effect( "highlight", {color: 'red'}, 400);
-				return;
-			}
-			page = 1;
-			load = false;
-			offset = null;
-			canScroll = true;
-			generateCriterias(generateQuery);
-			me.html('<i class="fa fa-cog fa-spin"></i> Search in progreess ...');
-			totalEntry = 0;
-			if (checkTimer) {
-				clearTimeout(checkTimer);
-				checkTimer = null;
-			}
-			loadBoots(1, false, true);
-		}
+		// function processRequest(me, generateQuery) {
+		// 	$('#mainTab').html('');
+		// 	if (load) {
+		// 		$(this).effect( "highlight", {color: 'red'}, 400);
+		// 		return;
+		// 	}
+		// 	page = 1;
+		// 	load = false;
+		// 	offset = null;
+		// 	canScroll = true;
+		// 	generateCriterias(generateQuery);
+		// 	me.html('<i class="fa fa-cog fa-spin"></i> Search in progreess ...');
+		// 	totalEntry = 0;
+		// 	if (checkTimer) {
+		// 		clearTimeout(checkTimer);
+		// 		checkTimer = null;
+		// 	}
+		// 	loadBoots(1, false, true);
+		// }
 
-		$('#searchBtn').click(function() {
-			processRequest($(this), true);
-		});
+		// $('#searchBtn').click(function() {
+		// 	processRequest($(this), true);
+		// });
 
-		$.ajax({
-			method: "GET",
-			url: APIURL + '/boot/list-content',
-			headers: {
-				"Authorization" : token,
-				"Content-Type" :"application/json"
-			},
-			success: function(data) {
-				searchQuery = {'sort':{'field': 'date', 'type':'DESC'}, 'criterias':{}};
-				searchQuery.criterias['arch'] = Array();
-				$.each(data.result.archs, function(i, elem) {
-					searchQuery.criterias['arch'].push(elem);
-					$('#select-archs').append('<option selected="selected">' + elem + '</option>');
-				});
-				searchQuery.criterias['kernel'] = Array();
-				$.each(data.result.kernels, function(i, elem) {
-					searchQuery.criterias['kernel'].push(elem);
-					$('#select-kernels').append('<option selected="selected">' + elem + '</option>');
-				});
-				searchQuery.criterias['job'] = Array();
-				$.each(data.result.trees, function(i, elem) {
-					searchQuery.criterias['job'].push(elem);
-					$('#select-job').append('<option selected="selected">' + elem + '</option>');
-				});
-				searchQuery.criterias['defconfig_full'] = Array();
-				$.each(data.result.defconfigs, function(i, elem) {
-					searchQuery.criterias['defconfig_full'].push(elem);
-					$('#select-defconfigs').append('<option selected="selected">' + elem + '</option>');
-				});
-				searchQuery.criterias['board'] = Array();
-				$.each(data.result.boards, function(i, elem) {
-					searchQuery.criterias['board'].push(elem);
-					$('#select-boards').append('<option selected="selected">' + elem + '</option>');
-				});
-				searchQuery.criterias['test_desc'] = Array();
-				$.each(data.result.test_desc, function(i, elem) {
-					searchQuery.criterias['test_desc'].push(elem);
-					$('#select-test_desc').append('<option selected="selected">' + elem + '</option>');
-				});
-				generateTab();
-				$(".select-icons").select2();
-				$("[id^=select-]").each(function(i, elem) {
-					changeTest($(elem).attr('id'), $(elem).attr('field'));
-				});
-				total_results = data.result.boots_total;
-				$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
-			}
-		});
+		// $.ajax({
+		// 	method: "GET",
+		// 	url: APIURL + '/boot/list-content',
+		// 	headers: {
+		// 		"Authorization" : token,
+		// 		"Content-Type" :"application/json"
+		// 	},
+		// 	success: function(data) {
+		// 		searchQuery = {'sort':{'field': 'date', 'type':'DESC'}, 'criterias':{}};
+		// 		searchQuery.criterias['arch'] = Array();
+		// 		$.each(data.result.archs, function(i, elem) {
+		// 			searchQuery.criterias['arch'].push(elem);
+		// 			$('#select-archs').append('<option selected="selected">' + elem + '</option>');
+		// 		});
+		// 		searchQuery.criterias['kernel'] = Array();
+		// 		$.each(data.result.kernels, function(i, elem) {
+		// 			searchQuery.criterias['kernel'].push(elem);
+		// 			$('#select-kernels').append('<option selected="selected">' + elem + '</option>');
+		// 		});
+		// 		searchQuery.criterias['job'] = Array();
+		// 		$.each(data.result.trees, function(i, elem) {
+		// 			searchQuery.criterias['job'].push(elem);
+		// 			$('#select-job').append('<option selected="selected">' + elem + '</option>');
+		// 		});
+		// 		searchQuery.criterias['defconfig_full'] = Array();
+		// 		$.each(data.result.defconfigs, function(i, elem) {
+		// 			searchQuery.criterias['defconfig_full'].push(elem);
+		// 			$('#select-defconfigs').append('<option selected="selected">' + elem + '</option>');
+		// 		});
+		// 		searchQuery.criterias['board'] = Array();
+		// 		$.each(data.result.boards, function(i, elem) {
+		// 			searchQuery.criterias['board'].push(elem);
+		// 			$('#select-boards').append('<option selected="selected">' + elem + '</option>');
+		// 		});
+		// 		searchQuery.criterias['test_desc'] = Array();
+		// 		$.each(data.result.test_desc, function(i, elem) {
+		// 			searchQuery.criterias['test_desc'].push(elem);
+		// 			$('#select-test_desc').append('<option selected="selected">' + elem + '</option>');
+		// 		});
+		// 		generateTab();
+		// 		$(".select-icons").select2();
+		// 		$("[id^=select-]").each(function(i, elem) {
+		// 			changeTest($(elem).attr('id'), $(elem).attr('field'));
+		// 		});
+		// 		total_results = data.result.boots_total;
+		// 		$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
+		// 	}
+		// });
 
-		function initInfiniteScroll() {
-			var offset = $('.myLine:last').offset(); 
+		// function initInfiniteScroll() {
+		// 	var offset = $('.myLine:last').offset(); 
 	 
-			$(window).scroll(function() {
+		// 	$(window).scroll(function() {
 				
-				if (isScrolledIntoView("#tableHeader")) {
-					$('#tableHeaderFixed').hide();
-				} else if ($(window).scrollTop() > $('#firstBloc').height()) {
-					$('#tableHeaderFixed').show();
-					$('#tableHeaderFixed').width($('.table-responsive').width());
-				}
+		// 		if (isScrolledIntoView("#tableHeader")) {
+		// 			$('#tableHeaderFixed').hide();
+		// 		} else if ($(window).scrollTop() > $('#firstBloc').height()) {
+		// 			$('#tableHeaderFixed').show();
+		// 			$('#tableHeaderFixed').width($('.table-responsive').width());
+		// 		}
 
-				j = 0;
-				while (j < 14) {
-					$('#fc' + j).width($('#c' + j).width());
-					j++;
-				}
+		// 		j = 0;
+		// 		while (j < 14) {
+		// 			$('#fc' + j).width($('#c' + j).width());
+		// 			j++;
+		// 		}
 
-				if ((offset.top - $(window).height() <= $(window).scrollTop()) && load == false && 
-					($('.myLine').size() >= 5) && canScroll) {
-						loadBoots(++page, false, false);
-				}
-			});
-		}
+		// 		if ((offset.top - $(window).height() <= $(window).scrollTop()) && load == false && 
+		// 			($('.myLine').size() >= 5) && canScroll) {
+		// 				loadBoots(++page, false, false);
+		// 		}
+		// 	});
+		// }
 
 		function checkNewEntry() {
 			$.ajax({
@@ -945,114 +942,114 @@
 			});
 		}
 
-		function loadBoots(page, first, second) {
-			$('#noResult').hide();
-			load = true;
-			$('.loadmore').show();
-			$('.more').hide();
-			$.ajax({
-				method: "PUT",
-				data: JSON.stringify(searchQuery),
-				url: APIURL + '/boot/search?nbr='+resultPerPage+'&p=' + page,
-				headers: {
-					"Authorization" : token,
-					"Content-Type" :"application/json"
-				},
-				success: function(data) {
-					$.each(data.result, function(i, elem) {
-						if (elem.test_plan == "power" && elem.boot_result == "PASS" /* && elem.lastBuild */) {
-							console.log(elem);
+		// function loadBoots(page, first, second) {
+		// 	$('#noResult').hide();
+		// 	load = true;
+		// 	$('.loadmore').show();
+		// 	$('.more').hide();
+		// 	$.ajax({
+		// 		method: "PUT",
+		// 		data: JSON.stringify(searchQuery),
+		// 		url: APIURL + '/boot/search?nbr='+resultPerPage+'&p=' + page,
+		// 		headers: {
+		// 			"Authorization" : token,
+		// 			"Content-Type" :"application/json"
+		// 		},
+		// 		success: function(data) {
+		// 			$.each(data.result, function(i, elem) {
+		// 				if (elem.test_plan == "power" && elem.boot_result == "PASS" /* && elem.lastBuild */) {
+		// 					console.log(elem);
 							
-							totalEntry++;
-							var dKPIField = $('#default_kpi').val();
-							var dKPIName = $('#default_kpi option:selected').text();
-							$('.dKPITab').html(dKPIName);
-							var meCumulNRJ = 0;
-							if (!elem.power_stats)
-								return;
-							$.each(elem.power_stats, function(ii, ps) {
-								if (ps[dKPIField] == "00.00")
-									return;
-								meCumulNRJ += eval(ps[dKPIField]);
-								if (ii >= unitTestMax)
-									return false;
-							});
-							$('#mainTab').append('<tr '+((elem.lastBuild) ? 'style="font-weight: bold;"' : '')+' id="'+elem._id.$id+'" class="myLine '+((elem.lastBuild) ? '' : '')+'" ><td class="hidden-md hidden-sm hidden-xs" id="'+elem._id.$id+'"><i class="fa fa-'+((elem.lastBuild) ? 'arrow-right' : 'child')+'"></i></td><td>'+elem.job+'</td><td>'+elem.kernel+'</td><td>'+elem.board+'</td><td><span data-toggle="tooltip" data-placement="top" title="'+elem.defconfig_full+'">'+elem.defconfig+'</span></td><td>'+getFromJson(elem.test_desc)+'</td><td>'+meCumulNRJ+'</td><td class="hidden-md hidden-sm hidden-xs">'+elem.arch+'</td><td class="text-center"><select target="'+elem._id.$id+'" class="selectReg select-'+elem._id.$id+'" class="form-control"> <option value="energy">Energy</option> <option value="power_min">Power Min</option> <option value="power_avg">Power AVG</option> <option value="power_max">Power Max</option> <option value="current_min">Current Min</option> <option value="current_max">Current Max</option> <option value="vbus_max">Voltage Max</option></select></td><td id="'+elem._id.$id+'_reg" class="text-center trend"><i class="fa fa-circle-o-notch fa-spin"></i></td><td class="hidden-md hidden-sm hidden-xs">'+elem.lab_name+'</td><td class="hidden-md hidden-sm hidden-xs">'+moment.unix(elem.date).format("DD/MM/YY HH:mm:ss")+'</td><td class="text-center details"><a href="power_details?id='+elem._id.$id+'"><i class="icon-search4"></i> Details</a></td></tr>');
-							regPicto = '<i class="fa fa-minus"></i>';
-							$('.select-'+elem._id.$id).change(function() {
-								if (!elem.regression || elem.regression.length <= 0)
-									return;
-								regPicto = '<i class="fa fa-minus"></i>';
-								target = $(this).attr('target');
-								$('#'+target+'_reg').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+		// 					totalEntry++;
+		// 					var dKPIField = $('#default_kpi').val();
+		// 					var dKPIName = $('#default_kpi option:selected').text();
+		// 					$('.dKPITab').html(dKPIName);
+		// 					var meCumulNRJ = 0;
+		// 					if (!elem.power_stats)
+		// 						return;
+		// 					$.each(elem.power_stats, function(ii, ps) {
+		// 						if (ps[dKPIField] == "00.00")
+		// 							return;
+		// 						meCumulNRJ += eval(ps[dKPIField]);
+		// 						if (ii >= unitTestMax)
+		// 							return false;
+		// 					});
+		// 					$('#mainTab').append('<tr '+((elem.lastBuild) ? 'style="font-weight: bold;"' : '')+' id="'+elem._id.$id+'" class="myLine '+((elem.lastBuild) ? '' : '')+'" ><td class="hidden-md hidden-sm hidden-xs" id="'+elem._id.$id+'"><i class="fa fa-'+((elem.lastBuild) ? 'arrow-right' : 'child')+'"></i></td><td>'+elem.job+'</td><td>'+elem.kernel+'</td><td>'+elem.board+'</td><td><span data-toggle="tooltip" data-placement="top" title="'+elem.defconfig_full+'">'+elem.defconfig+'</span></td><td>'+getFromJson(elem.test_desc)+'</td><td>'+meCumulNRJ+'</td><td class="hidden-md hidden-sm hidden-xs">'+elem.arch+'</td><td class="text-center"><select target="'+elem._id.$id+'" class="selectReg select-'+elem._id.$id+'" class="form-control"> <option value="energy">Energy</option> <option value="power_min">Power Min</option> <option value="power_avg">Power AVG</option> <option value="power_max">Power Max</option> <option value="current_min">Current Min</option> <option value="current_max">Current Max</option> <option value="vbus_max">Voltage Max</option></select></td><td id="'+elem._id.$id+'_reg" class="text-center trend"><i class="fa fa-circle-o-notch fa-spin"></i></td><td class="hidden-md hidden-sm hidden-xs">'+elem.lab_name+'</td><td class="hidden-md hidden-sm hidden-xs">'+moment.unix(elem.date).format("DD/MM/YY HH:mm:ss")+'</td><td class="text-center details"><a href="power_details?id='+elem._id.$id+'"><i class="icon-search4"></i> Details</a></td></tr>');
+		// 					regPicto = '<i class="fa fa-minus"></i>';
+		// 					$('.select-'+elem._id.$id).change(function() {
+		// 						if (!elem.regression || elem.regression.length <= 0)
+		// 							return;
+		// 						regPicto = '<i class="fa fa-minus"></i>';
+		// 						target = $(this).attr('target');
+		// 						$('#'+target+'_reg').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
 
-								if (elem.regression[0][$(this).val()] == "GT")
-									regPicto = '<i class="text-success icon-stairs-up"></i>';
-								else if (elem.regression[0][$(this).val()] == 'LT')
-									regPicto = '<i class="text-danger icon-stairs-down"></i>';
-								else if (elem.regression[0][$(this).val()] == 'EQ')
-									regPicto = '<i class="text-warning fa fa-equal"></i>';
-								$('#'+target+'_reg').html(regPicto);
-							})
-							if (elem.regression) {
-								if (elem.regression.length == 0)
-									regPicto = '<i class="text-warning fa fa-question"></i>';
-								else if (elem.regression[0][dKPIField] == "GT")
-									regPicto = '<i class="text-success icon-stairs-up"></i>';
-								else if (elem.regression[0][dKPIField] == 'LT')
-									regPicto = '<i class="text-danger icon-stairs-down"></i>';
-								else if (elem.regression[0][dKPIField] == 'EQ')
-									regPicto = '<i class="text-warning fa fa-equal"></i>';
-							}
-							$('#'+elem._id.$id+'_reg').html(regPicto);
-							$('.selectReg option[value="'+dKPIField+'"]').attr("selected", true);
-						}
-					});
+		// 						if (elem.regression[0][$(this).val()] == "GT")
+		// 							regPicto = '<i class="text-success icon-stairs-up"></i>';
+		// 						else if (elem.regression[0][$(this).val()] == 'LT')
+		// 							regPicto = '<i class="text-danger icon-stairs-down"></i>';
+		// 						else if (elem.regression[0][$(this).val()] == 'EQ')
+		// 							regPicto = '<i class="text-warning fa fa-equal"></i>';
+		// 						$('#'+target+'_reg').html(regPicto);
+		// 					})
+		// 					if (elem.regression) {
+		// 						if (elem.regression.length == 0)
+		// 							regPicto = '<i class="text-warning fa fa-question"></i>';
+		// 						else if (elem.regression[0][dKPIField] == "GT")
+		// 							regPicto = '<i class="text-success icon-stairs-up"></i>';
+		// 						else if (elem.regression[0][dKPIField] == 'LT')
+		// 							regPicto = '<i class="text-danger icon-stairs-down"></i>';
+		// 						else if (elem.regression[0][dKPIField] == 'EQ')
+		// 							regPicto = '<i class="text-warning fa fa-equal"></i>';
+		// 					}
+		// 					$('#'+elem._id.$id+'_reg').html(regPicto);
+		// 					$('.selectReg option[value="'+dKPIField+'"]').attr("selected", true);
+		// 				}
+		// 			});
 					
-				    $('#fixed1').html(totalEntry + '/' + total_results);
-				    $('#fixed2').html(Math.round(eval(totalEntry * 100 / total_results)) + '%');
-					j = 0;
-					while (j < 14) {
-						$('#fc' + j).width($('#c' + j).width());
-						j++;
-					}
-					$('[data-toggle="tooltip"]').tooltip()
-					if (first) {
-						initInfiniteScroll();
-					}
-					$('.loadmore').fadeOut(500, function() {
-						$('.more').fadeIn(500);
-					});
-					$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
-					$('.myLine:last').after(data);
-					offset = $('.myLine:last').offset();
-					load = false;
+		// 		    $('#fixed1').html(totalEntry + '/' + total_results);
+		// 		    $('#fixed2').html(Math.round(eval(totalEntry * 100 / total_results)) + '%');
+		// 			j = 0;
+		// 			while (j < 14) {
+		// 				$('#fc' + j).width($('#c' + j).width());
+		// 				j++;
+		// 			}
+		// 			$('[data-toggle="tooltip"]').tooltip()
+		// 			if (first) {
+		// 				initInfiniteScroll();
+		// 			}
+		// 			$('.loadmore').fadeOut(500, function() {
+		// 				$('.more').fadeIn(500);
+		// 			});
+		// 			$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
+		// 			$('.myLine:last').after(data);
+		// 			offset = $('.myLine:last').offset();
+		// 			load = false;
 
-				},
-				error: function(data) {
-					if (checkTimer)
-						clearTimeout(checkTimer);
-					checkTimer = setTimeout(checkNewEntry, timeToCheck);
-					canScroll = false;
-					$('.loadmore').fadeOut(500);
-					$('.more').hide();
-					load = false;
-					if (second) {
-						$('#noResult').show();
-						$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
-					}
-					if (first) {
-						swal({
-							title: "Oops...",
-							text: "Something went wrong!<br>Reason: API is maybe down ?",
-							confirmButtonColor: "#EF5350",
-							html: true,
-							type: "error"
-						});
-					}
-				}
-			});
-		}
+		// 		},
+		// 		error: function(data) {
+		// 			if (checkTimer)
+		// 				clearTimeout(checkTimer);
+		// 			checkTimer = setTimeout(checkNewEntry, timeToCheck);
+		// 			canScroll = false;
+		// 			$('.loadmore').fadeOut(500);
+		// 			$('.more').hide();
+		// 			load = false;
+		// 			if (second) {
+		// 				$('#noResult').show();
+		// 				$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + total_results + ' records');
+		// 			}
+		// 			if (first) {
+		// 				swal({
+		// 					title: "Oops...",
+		// 					text: "Something went wrong!<br>Reason: API is maybe down ?",
+		// 					confirmButtonColor: "#EF5350",
+		// 					html: true,
+		// 					type: "error"
+		// 				});
+		// 			}
+		// 		}
+		// 	});
+		// }
 
 		function generateTab() {
 			$('#mainTab').html('');

@@ -89,8 +89,7 @@
     position: absolute;
     background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 100%);
     background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 100%);
-    background: radial-gradient(ellipse at center,  rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 100%); 
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+    background: radial-gradient(ellipse at center,  rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 100%);
 
     
     color:white;/*

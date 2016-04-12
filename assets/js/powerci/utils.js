@@ -41,8 +41,10 @@ function isScrolledIntoView(elem)
 /* SETTINGS MENU LOGIC */
 
 function initMenu(tour) {
+	if (!tour)
+		throw Exception('Invalid Tour provided !', false);
+
 	$('#resetTipsButton').click(function() {
-		console.log('cliiick');
 		localStorage.setItem('powerci_tips', 'yes');
 	});
 
