@@ -22,9 +22,9 @@ var Powers = {
 			this.confLoader.load(configFile).done(function() {
 				me.tour = initTour('powers'); // Init powers tour
 				showTips('#tipsMain'); // Call function which will show or not tips by reading SessionStorage
-				me.tour.init(); // Init tour AFTER "showTips" cause 
+				me.tour.init(); // Init tour AFTER "showTips"
 				me.manageTips();
-				me.manageGUI();
+				me.manageGUI(); // Hide/show elments into DOM and trigger click/change ..
 				me.profilManager.displayProfils();
 			}); // Load JSON config file - Promise returned
 		} catch (e) {
@@ -66,6 +66,33 @@ var Powers = {
 
 		$('#searchBtn').click(function() {
 			me.processRequest($(this), true);
+		});
+
+		$('#nestedBtn').click(function() {
+			if ($(this).hasClass('btn-primary')) {
+				$(this).removeClass('btn-primary');
+				$(this).addClass('btn-default');
+			} else {
+				$(this).addClass('btn-primary');
+				$(this).removeClass('btn-default');
+			}
+			me.processRequest($('#searchBtn'), true);
+		});
+
+		$('#closeCompareViewBtn').click(function() {
+			$('#allMainContent').show();
+			$('#compareView').hide();
+			$('#customSearchBtn').show();
+			$('#tipsCompare').hide();
+			me.showTips('#tipsMain');
+		});
+
+		$("#compareBtn-test_desc").click(function() {
+			me.generateCompareView();
+		});
+
+		$('[id^=select-]').change(function() {
+			me.allowCompare($(this).attr('id'), $(this).attr('field'));
 		});
 	},
 	manageBeforeLoading: function() {
@@ -160,9 +187,9 @@ var Powers = {
 				});
 				me.generateTab();
 				$(".select-icons").select2();
-				// $("[id^=select-]").each(function(i, elem) {
-				// 	me.changeTest($(elem).attr('id'), $(elem).attr('field'));
-				// });
+				$("[id^=select-]").each(function(i, elem) {
+					me.allowCompare($(elem).attr('id'), $(elem).attr('field'));
+				});
 				me.totalResults = data.result.boots_total;
 				$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + me.totalResults + ' records');
 			}
@@ -203,6 +230,17 @@ var Powers = {
 	generateTab: function() {
 		$('#mainTab').html('');
 		this.loadBoots(1, true, true);
+	},
+	allowCompare: function(elem, field) {
+		if ($('#' + elem).val() && $('#' + elem).val().length == 1) {
+			$('#compareBtn-' + field).show();
+			$('#' + elem).width('90%');
+			$('#' + elem).parent().find('.select2-container').width('90%');
+		} else {
+			$('#compareBtn-' + field).hide();
+			$('#' + elem).width('100%');
+			$('#' + elem).parent().find('.select2-container').width('100%');
+		}
 	},
 	processRequest: function(me, generateQuery) {
 		$('#mainTab').html('');
@@ -300,6 +338,75 @@ var Powers = {
 					});
 				}
 			}
+		});
+	},
+	generateCompareView: function() {
+		var me = this;
+
+		$('#compareGraph').html('<center><br><i class="fa fa-cog fa-spin"></i></center>');
+		$('#allMainContent').hide();
+		$('#compareView').show();
+		showTips('#tipsCompare');
+		$('#tipsMain').hide();
+		$('#customSearchBtn').hide();
+
+		this.generateCriterias(true); // Regenerate criteria for compare view
+		$.ajax({
+				method: "PUT",
+				data: JSON.stringify(me.searchQuery),
+				headers: {
+					"Authorization" : this.confLoader.getApiToken(),
+					"Content-Type" :"application/json"
+				},
+				url: this.confLoader.getApiURL() + '/graph/boot/compare',
+				success: function(data) {
+					elemm = data.result[0];
+					$('#compareGraph').highcharts({
+						chart: {
+			                zoomType: 'x',
+			                renderTo: 'container',
+			                type: elemm.type
+			            },
+				        title: {
+				            text: elemm.title + ' - ' + $('#select-test_desc').val(),
+				            margin: 65,
+				            x: -20 //center
+				        },
+				        xAxis: {
+				            categories: elemm.xAxis,
+				            labels: {
+				            	useHTML: true,
+				            	rotation: -90,
+				            	style: {
+							        "textOverflow": "none"
+							      }
+				            }
+				        },
+				        yAxis: {
+				            title: {
+				                text: elemm.unit
+				            },
+				            plotLines: [{
+				                value: 0,
+				                width: 1,
+				                color: '#808080'
+				            }]
+				        },
+				        legend: {
+				            align: 'center',
+				            verticalAlign: 'top',
+				            floating: true,
+				            x: 0,
+				            y: 30
+				        },
+				        series: elemm.series
+				    });
+
+				    for (i = 0; i < $('#compareGraph').highcharts().series.length; i++) {
+				    	if ($('#compareGraph').highcharts().series[i].name != $('#default_kpi option:selected').text())
+				    		$('#compareGraph').highcharts().series[i].hide();
+				    }
+				}
 		});
 	}
 }
