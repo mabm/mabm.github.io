@@ -1,5 +1,5 @@
 var Profils = {
-	powerInstance: null,
+	powerInstance : null,
 
 	init: function(powerInstance) {
 		this.powerInstance = powerInstance;

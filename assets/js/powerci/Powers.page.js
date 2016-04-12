@@ -1,18 +1,18 @@
 var Powers = {
 	/* Attributes */
-	confLoader : ConfLoader,
-	tour: null,
-	load: false,
-	page: 1,
-	resultPerPage: 10,
-	defaultTestPlan: "power",
-	totalEntry: 0,
-	defaultRegressionPicto: '<i class="fa fa-minus"></i>',
-	totalResults: 0,
-	offset: null,
-	canScroll: true,
-	profilManager: Profils,
-	searchQuery: null,
+	confLoader              : ConfLoader,
+	tour                    : null,
+	load                    : false,
+	page                    : 1,
+	resultPerPage           : 10,
+	defaultTestPlan         : "power",
+	totalEntry              : 0,
+	defaultRegressionPicto  : '<i class="fa fa-minus"></i>',
+	totalResults            : 0,
+	offset                  : null,
+	canScroll               : true,
+	profilManager           : Profils,
+	searchQuery             : null,
 
 	/* Methods */
 	init: function(configFile) {
@@ -280,7 +280,7 @@ var Powers = {
 					var dKPIField = $('#default_kpi').val(); // Get default KPI selected by user
 					$('.dKPITab').html($('#default_kpi option:selected').text()); // Set column name to selected KPI
 
-					if (elem.test_plan == me.defaultTestPlan && elem.boot_result == "PASS") {
+					if (elem.test_plan == me.defaultTestPlan && elem.boot_result == "PASS" && $.isArray(elem.power_stats)) {
 						me.totalEntry++; // Count total entry
 						if (!elem.power_stats) // Fetched boot does not have power values
 							return;

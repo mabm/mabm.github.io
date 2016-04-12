@@ -1,8 +1,8 @@
 var ConfLoader = {
 	/* Attributes */
-    apiToken : "",
+    apiToken    : "",
     lavaBaseURL : null,
-    apiURL : "",
+    apiURL      : "",
 
     /* Init method */
     load : function(file) {
