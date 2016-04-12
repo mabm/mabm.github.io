@@ -1,0 +1,4 @@
+{ "_id" : { "$oid" : "56b477b2883d7db6784c0c5a" }, "lab_name" : "admin", "token" : "1d35119c-621f-4a02-80d6-7852a4db6710", "write" : true, "read" : true }
+{ "_id" : { "$oid" : "56b47ea611fe528c3f2d3c4b" }, "lab_name" : "viewer", "token" : "p4d5d8s4-621f-4a02-80d6-7852a4d5d87z", "write" : false, "read" : true }
+{ "_id" : { "$oid" : "56b47ed011fe528c3f2d3c4c" }, "read" : false }
+{ "_id" : { "$oid" : "56b480c7e03376bf18e32165" }, "lab_name" : "writer", "token" : "k847sd47-621f-4a02-80d6-7852a4d7dl24", "write" : true, "read" : false }
