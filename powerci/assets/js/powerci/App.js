@@ -4,9 +4,9 @@ function App(pageName) {
 
 	/* Constructor */
 	if (pageName == 'powers') {
-		this.instance = Powers;
+		this.instance = Powers; // Load Powers Module
 	} else if (pageName == 'powers_details') {
-		this.instance = PowerDetails;
+		this.instance = PowerDetails; // Load PowerDetails Module
 	} else {
 		throw new Exception('Error while instantiating App function - Bad page name provided', true);
 	}
