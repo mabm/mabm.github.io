@@ -2,8 +2,9 @@ var PowerDetails = {
 	confLoader 				: ConfLoader,
 	tour 					: null,
 	profilManager           : Profils,
+	dataSeries				: Array(),
 
-	init: function() {
+	init: function(configFile) {
 		var me = this;
 
 		try {
@@ -20,6 +21,9 @@ var PowerDetails = {
 		} catch (e) {
 			throw e;
 		}
+	},
+	getTour: function() {
+		return this.tour;
 	},
 	launch: function() {
 		var me = this;
@@ -42,13 +46,12 @@ var PowerDetails = {
 
 				me.fillRegTab(); // Fill "previous builds" table
 				me.fillDetails(result); // Fill "Details" bloc
-				
-				// iData = 0;
+
 				$.each(result.power_stats, function(unused, elem) {
 					if (elem.show_as == "IMAGE") {
 						$('#graphContainer').append('<div class="col-lg-6"><div class="panel panel-flat tourGraph" id=""><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"><ul class="icons-list"> <li><a data-action="collapse"></a></li></ul> </div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chart"><img src="http://powerci.org:8889/attachments/'+ elem.data + '/' + elem.filename + '" width="100%"></div></center><br><table class="table"> <tr> <td>Power Min</td><td>Power AVG</td><td>Power Max</td><td>Current Min</td><td>Current Max</td><td>Voltage Max</td><td>Energy</td></tr><tr> <td id="pmin_'+unused+'"></td><td id="pavg_'+unused+'"></td><td id="pmax_'+unused+'"></td><td id="cmin_'+unused+'"></td><td id="cmax_'+unused+'"></td><td id="vmax_'+unused+'"></td><td id="nrj_'+unused+'"></td></tr></table></div></div></div></div></div>');
 					} else if (elem.show_as == "GRAPH") {
-						me.showAsGraph();
+						me.showAsGraph(elem, unused);
 					}
 					$('#pmin_' + unused).html(elem.power_min);
 					$('#pavg_' + unused).html(elem.power_avg);
@@ -58,67 +61,73 @@ var PowerDetails = {
 					$('#vmax_' + unused).html(elem.vbus_max);
 					$('#nrj_' + unused).html(elem.energy);
 				})
-				$.ajax({
-					type: "GET",
-					async: true,
-					headers: {
-						"Authorization" :token,
-						"Content-Type" :"application/json"
-					},
-					url: 'http://powerci.org:9999/graph/boot/regression/' + getUrlVars('id'),
-					success: function(data) {
-						console.log(data);
-						$.each(data.result, function(i, elem) {
-							$.each(elem.series, function(ii, elemm) {
-								$('#graphContainer').append('<div class="col-lg-6"><div class="panel panel-flat tourReg"><div class="panel-heading"><h5 class="panel-title"><b>'+elem.title+' - '+elemm.name+'</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><div class="col-lg-12" id="chartr-'+ii+'">'+elem.unit+'</div></div></div></div></div></div>');
-								$('#chartr-'+ii).highcharts({
-									chart: {
-						                zoomType: 'x',
-						                type: 'spline'
-						            },
-							        title: {
-							            text: elem.title + ' - ' + elemm.name,
-							            x: -20 //center
-							        },
-							        xAxis: {
-							            categories: elem.xAxis,
-							            labels: {
-							            	useHTML: true
-							            }
-							        },
-							        yAxis: {
-							            title: {
-							                text: elem.unit
-							            },
-							            plotLines: [{
-							                value: 0,
-							                width: 1,
-							                color: '#808080'
-							            }]
-							        },
-							        legend: {
-							            layout: 'vertical',
-							            align: 'right',
-							            verticalAlign: 'middle',
-							            borderWidth: 0
-							        },
-							        series: Array(elemm)
-							    });
-							});
-						})
-						
-					},
-					error: function(data) {
-						
-					}
-				});
+				me.generateAllRegressionTabs();
 			},
 			error: function(data) {
 				errorMessage('API is maybe down ?');
 			}
 		});
 	},
+	generateAllRegressionTabs: function() {
+		$.ajax({
+			type: "GET",
+			async: true,
+			headers: {
+				"Authorization" : this.confLoader.getApiToken(),
+				"Content-Type" :"application/json"
+			},
+			url: this.confLoader.getApiURL() + '/graph/boot/regression/' + getUrlVars('id'),
+			success: function(data) {
+				$.each(data.result, function(i, elem) {
+					$.each(elem.series, function(ii, elemm) {
+						$('#graphContainer').append('<div class="col-lg-6"><div class="panel panel-flat tourReg"><div class="panel-heading"><h5 class="panel-title"><b>'+elem.title+' - '+elemm.name+'</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><div class="col-lg-12" id="chartr-'+ii+'">'+elem.unit+'</div></div></div></div></div></div>');
+						$('#chartr-'+ii).highcharts({
+							chart: {
+				                zoomType: 'x',
+				                type: 'spline'
+				            },
+					        title: {
+					            text: elem.title + ' - ' + elemm.name,
+					            x: -20 //center
+					        },
+					        xAxis: {
+					            categories: elem.xAxis,
+					            labels: {
+					            	useHTML: true
+					            }
+					        },
+					        yAxis: {
+					            title: {
+					                text: elem.unit
+					            },
+					            plotLines: [{
+					                value: 0,
+					                width: 1,
+					                color: '#808080'
+					            }]
+					        },
+					        legend: {
+					            layout: 'vertical',
+					            align: 'right',
+					            verticalAlign: 'middle',
+					            borderWidth: 0
+					        },
+					        series: Array(elemm)
+					    });
+					});
+				})
+				
+			},
+			error: function(data) {
+				
+			}
+		});
+	},
 	fillRegTab: function() {
+		var red = "rgba(231, 76, 60, .5)";
+		var green = "rgba(46, 204, 113, .5)";
+		var orange = "rgba(52, 152, 219, .5)";
+
 		$.ajax({
 			method: "GET",
 			url: this.confLoader.getApiURL() + '/boot/regression-by-id/' + getUrlVars('id'),
@@ -174,6 +183,119 @@ var PowerDetails = {
 		$('#dt_boot_retries').html(getFromJson(result.retries));
 		$('#board_name').html(result.board);
 		$('#lab_name').html("By " + result.lab_name);
+	},
+	showAsGraph: function(elem, unused) {
+		var me = this;
+
+		$.ajax({
+			type: "GET",
+			async: false,
+			dataType: 'html',
+			url: this.confLoader.getStorageURL() + '/attachments/'+ elem.data + '/' + elem.filename,
+			success: function(csv) {
+				$('#graphContainer').append('<div class="col-lg-12"><div id="dynamic-'+unused+'" class="panel panel-flat"><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chartLoading text-center"><br><br><br><br><br><br><h1>Loading ...</h1></div><div class="chart" id="chart-'+unused+'"></div><br><div style="width:50%" id="slider-threshold" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><span style="position:absolute;left:0px;top:7px"><b>Coarse (fast)</b></span> <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.080032%;"></a><span style="position:absolute;right:0px;top:7px"><b>Fine (slow)</b></span></div><span id="sliderVal"></span> buckets</center><br><table class="table"> <tr> <td>Power Min</td><td>Power AVG</td><td>Power Max</td><td>Current Min</td><td>Current Max</td><td>Voltage Max</td><td>Energy</td></tr><tr> <td id="pmin_'+unused+'"></td><td id="pavg_'+unused+'"></td><td id="pmax_'+unused+'"></td><td id="cmin_'+unused+'"></td><td id="cmax_'+unused+'"></td><td id="vmax_'+unused+'"></td><td id="nrj_'+unused+'"></td></tr></table></div></div></div></div></div>');
+				$('.chartLoading').hide();
+				Highcharts.setOptions({
+			        lang: {
+			            numericSymbols: null
+			        }
+			    });
+			    var options = {
+								chart: {
+					                zoomType: 'x',
+					                renderTo: $('#chart-'+unused)[0]
+					            },
+								title: {
+									text: elem.title
+								},
+								 credits: {
+						            enabled: false
+						        },
+								xAxis: {
+									categories: [],
+									type: "line"
+								},
+								yAxis: {
+						            title: {
+						                text: "milli-SI"
+						            }
+						        },
+						        series: []
+							};
+
+				var mix = me.parseCSV(csv, options);
+
+				options = mix[0];
+
+			    var chart = new Highcharts.Chart(options);
+			    $('#sliderVal').html(chart.series[0].options.downsample.threshold);
+			    $('.chartLoading').height($('#chart-'+unused).height());
+			    $('.chartLoading').width($('#chart-'+unused).width());
+			    var $slider = $("#slider-threshold").slider({
+			        value: chart.series[0].options.downsample.threshold,
+			        min: 100,
+			        max: 50 * mix[1] / 100,
+			        slide: function(event, ui) {
+			        	$('#sliderVal').html(ui.value);
+			        },
+			        start: function() {
+			        	$('.chartLoading').height($('#chart-'+unused).height());
+			    		$('.chartLoading').width($('#chart-'+unused).width());
+			        	$('.chartLoading').show();
+			        },
+			        change: function( event, ui ) {
+			        	for (i = 0; i < 4; i++) {
+			        		chart.series[i].options.downsample.threshold = ui.value;
+				            chart.series[i].setData(me.dataSeries[i]);
+			        	}
+			        	$('.chartLoading').hide();
+			       }
+			    });
+				$('#chart-'+unused).highcharts().series[0].hide();
+			},
+			error: function(data) {
+				continueing = false;
+			}
+		});
+	},
+	parseCSV: function(csv, options) {
+		var me = this;
+
+		var lines = csv.split('\n');
+	    var maxLines = 0;
+	    $.each(lines, function(lineNo, line) {
+	        var items = line.split(',');
+	        if (lineNo == 0) {
+	            $.each(items, function(itemNo, item) {
+	                if (itemNo > 0) {
+	                	var series = {
+			                data: [],
+			                name: item,
+			                downsample : {threshold: 2000}
+			            };
+			            options.series.push(series);
+	                }
+	            });
+	        }
+
+	        else {
+	            $.each(items, function(itemNo, item) {
+	            	if (item.length == 0)
+	            		return;
+	                if (itemNo == 0) {
+	                    options.xAxis.categories.push(item);
+	                    me.dataSeries[itemNo]
+	                } else {
+	                	options.series[itemNo -1].data.push(parseFloat(item));
+	                	if (me.dataSeries[itemNo - 1] == undefined)
+	                		me.dataSeries[itemNo - 1] = Array();
+	                	me.dataSeries[itemNo - 1].push(parseFloat(item));
+	                }
+	            });
+	        }
+	        maxLines = lineNo;
+	    });
+		return Array(options, maxLines);
 	},
 	manageGUI: function() {
 		$('#prevZone').html('<center><i class="fa fa-circle-o-notch fa-spin"></i></center>');

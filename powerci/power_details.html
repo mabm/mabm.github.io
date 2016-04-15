@@ -52,6 +52,13 @@
 	<script type="text/javascript" src="assets/js/powerci/charts.js"></script>
 	<script type="text/javascript" src="assets/js/powerci/utils.js"></script>
 
+	<script type="text/javascript" src="assets/js/powerci/Exception.class.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/ConfLoader.class.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/initTour.function.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/Profils.class.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/PowerDetails.page.js"></script>
+	<script type="text/javascript" src="assets/js/powerci/App.js"></script>
+
 
 	<!-- /theme JS files -->
 
@@ -331,14 +338,30 @@
 	</script>
 
 	<script>
+		$(document).ready(function() {
+			// try {
+				var app = App('powers_details');
+
+				app.init('config.json');
+				app.launch();
+			// } catch (e) {
+			// 	if (e.getMessage)
+			// 		console.log('Catched error : ' + e.getMessage());
+			// 	else
+			// 		console.log('Uncaught error : ' + e);
+			// }
+		});
+	</script>
+
+	<script>
 	$(document).ready(function() {
-		var token = "p4d5d8s4-621f-4a02-80d6-7852a4d5d87z";
-		var power_stats = null;
-		var lavaBaseURL = "http://lava.baylibre.com:10080/dashboard/streams/anonymous/powerci/bundles/";
-		var red = "rgba(231, 76, 60, .5)";
-		var green = "rgba(46, 204, 113, .5)";
-		var orange = "rgba(52, 152, 219, .5)";
-		var dataSeries = Array();
+		// var token = "p4d5d8s4-621f-4a02-80d6-7852a4d5d87z";
+		// var power_stats = null;
+		// var lavaBaseURL = "http://lava.baylibre.com:10080/dashboard/streams/anonymous/powerci/bundles/";
+		// var red = "rgba(231, 76, 60, .5)";
+		// var green = "rgba(46, 204, 113, .5)";
+		// var orange = "rgba(52, 152, 219, .5)";
+		// var dataSeries = Array();
 
 		// var tour = new Tour({
 		//   steps: [

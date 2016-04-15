@@ -6,7 +6,7 @@ function App(pageName) {
 	if (pageName == 'powers') {
 		this.instance = Powers;
 	} else if (pageName == 'powers_details') {
-		this.instance = DetailsPowers();
+		this.instance = PowerDetails;
 	} else {
 		throw new Exception('Error while instantiating App function - Bad page name provided', true);
 	}
