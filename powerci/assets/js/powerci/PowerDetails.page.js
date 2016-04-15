@@ -81,7 +81,7 @@ var PowerDetails = {
 				$.each(data.result, function(i, elem) {
 					$.each(elem.series, function(ii, elemm) {
 						$('#graphContainer').append('<div class="col-lg-6"><div class="panel panel-flat tourReg"><div class="panel-heading"><h5 class="panel-title"><b>'+elem.title+' - '+elemm.name+'</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><div class="col-lg-12" id="chartr-'+ii+'">'+elem.unit+'</div></div></div></div></div></div>');
-						$('#chartr-'+ii).highcharts({
+						$('#chartr-'+ii).highcharts('StockChart', {
 							chart: {
 				                zoomType: 'x',
 				                type: 'spline'
@@ -90,6 +90,16 @@ var PowerDetails = {
 					            text: elem.title + ' - ' + elemm.name,
 					            x: -20 //center
 					        },
+					        tooltip: {
+					            shared: false,
+					            useHTML: true,
+					            formatter: function () {
+					                var s = '<b>' + Highcharts.dateFormat('%A, %b %e, %Y', this.x) + '</b>';
+					                s += '<br>' + this.series.name + ': <b>' + this.y + '</b><br>' + this.point.name + '';
+
+					                return s;
+					            }
+					        },
 					        xAxis: {
 					            categories: elem.xAxis,
 					            labels: {
@@ -97,6 +107,8 @@ var PowerDetails = {
 					            }
 					        },
 					        yAxis: {
+					        	gridLineWidth: 1,
+					        	minorGridLineWidth: 1,
 					            title: {
 					                text: elem.unit
 					            },
@@ -201,27 +213,53 @@ var PowerDetails = {
 			        }
 			    });
 			    var options = {
-								chart: {
-					                zoomType: 'x',
-					                renderTo: $('#chart-'+unused)[0]
-					            },
-								title: {
-									text: elem.title
-								},
-								 credits: {
-						            enabled: false
-						        },
-								xAxis: {
-									categories: [],
-									type: "line"
-								},
-								yAxis: {
-						            title: {
-						                text: "milli-SI"
-						            }
-						        },
-						        series: []
-							};
+					chart: {
+		                zoomType: 'x',
+		                renderTo: $('#chart-'+unused)[0]
+		            },
+					title: {
+						text: elem.title
+					},
+					 credits: {
+			            enabled: false
+			        },
+					xAxis: {
+						categories: [],
+						type: "line"
+					},
+					yAxis: {
+			            title: {
+			                text: "milli-SI"
+			            }
+			        },
+			        scrollbar: {
+			            enabled:true,
+						barBackgroundColor: 'gray',
+						barBorderRadius: 7,
+						barBorderWidth: 0,
+						buttonBackgroundColor: 'gray',
+						buttonBorderWidth: 0,
+						buttonArrowColor: 'yellow',
+						buttonBorderRadius: 7,
+						rifleColor: 'yellow',
+						trackBackgroundColor: 'white',
+						trackBorderWidth: 1,
+						trackBorderColor: 'silver',
+						trackBorderRadius: 7
+				    },
+			        credits: {
+			            enabled: true,
+			            position: {
+			                align: 'left',
+			                x: 10,
+			                verticalAlign: 'bottom',
+			                y: -5
+			            },
+			            href: "http://www.baylibre.com",
+			            text: "Baylibre"
+			        },
+			        series: []
+				};
 
 				var mix = me.parseCSV(csv, options);
 

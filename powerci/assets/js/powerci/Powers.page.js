@@ -372,6 +372,12 @@ var Powers = {
 				            margin: 65,
 				            x: -20 //center
 				        },
+				        plotOptions: {
+				            column: {
+				                pointPadding: 0.2,
+				                borderWidth: 0.5
+				            }
+				        },
 				        xAxis: {
 				            categories: elemm.xAxis,
 				            labels: {
@@ -381,6 +387,32 @@ var Powers = {
 							        "textOverflow": "none"
 							      }
 				            }
+				        },
+				        scrollbar: {
+				            enabled:true,
+							barBackgroundColor: 'gray',
+							barBorderRadius: 7,
+							barBorderWidth: 0,
+							buttonBackgroundColor: 'gray',
+							buttonBorderWidth: 0,
+							buttonArrowColor: 'yellow',
+							buttonBorderRadius: 7,
+							rifleColor: 'yellow',
+							trackBackgroundColor: 'white',
+							trackBorderWidth: 1,
+							trackBorderColor: 'silver',
+							trackBorderRadius: 7
+					    },
+				        credits: {
+				            enabled: true,
+				            position: {
+				                align: 'left',
+				                x: 10,
+				                verticalAlign: 'bottom',
+				                y: -5
+				            },
+				            href: "http://www.baylibre.com",
+				            text: "Baylibre"
 				        },
 				        yAxis: {
 				            title: {

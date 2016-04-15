@@ -342,14 +342,14 @@
 								)
 							);
 				if (property_exists($precBoot, "power_stats")) {
-					array_push($bootPrecs[0]['data'], (float) $precBoot->power_stats[0]['energy']);
-					array_push($bootPrecs[1]['data'], (float) $precBoot->power_stats[0]['power_min']);
-					array_push($bootPrecs[2]['data'], (float) $precBoot->power_stats[0]['power_max']);
-					array_push($bootPrecs[3]['data'], (float) $precBoot->power_stats[0]['power_avg']);
-					array_push($bootPrecs[4]['data'], (float) $precBoot->power_stats[0]['current_min']);
-					array_push($bootPrecs[5]['data'], (float) $precBoot->power_stats[0]['current_max']);
-					array_push($bootPrecs[6]['data'], (float) $precBoot->power_stats[0]['vbus_max']);
-					array_push($obj['xAxis'], '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.date('d/m/Y', $precBoot->date).'</a>');
+					array_push($bootPrecs[0]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['energy']));
+					array_push($bootPrecs[1]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['power_min']));
+					array_push($bootPrecs[2]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['power_max']));
+					array_push($bootPrecs[3]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['power_avg']));
+					array_push($bootPrecs[4]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['current_min']));
+					array_push($bootPrecs[5]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['current_max']));
+					array_push($bootPrecs[6]['data'], array("name" => '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->kernel.'</a>', "x" => $precBoot->date * 1000, "y" => (float) $precBoot->power_stats[0]['vbus_max']));
+					array_push($obj['xAxis'], '<a target="_blank" href="power_details?id='.$precBoot->getId().'">'.$precBoot->date.'</a>');
 				}
 				$i++;
 			}
