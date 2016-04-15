@@ -72,6 +72,42 @@ function initTour(page) {
 					debug: true,
 					backdrop: true
 				});
+
+	} else if (page == "powerDetails") {
+		return new Tour({
+				  steps: [
+					  {
+					    element: "#staticCntn",
+					    title: "Report details",
+					    content: "Here you can find the details about the test configuration and the kernel built under test, as well as other usefull information like to boot time (test execution time)<br><br>Eventually this will also link back to the actual git commit and kernel sources."
+					  },
+					  {
+					    element: "#tourLava",
+					    title: "Lava bundle",
+					    content: "Since we are using LAVA as the test back-end, you can find details of each unit test and \"dispatcher actions\" following the link to the LAVA result bundle."
+					  },
+					  {
+					    element: "#tourPrevious",
+					    title: "Previous builds",
+					    content: "Once a test configuration has some history, meaning that it was executed for different version of the kernel sources, a summary of the power stats is listed for each previous build.<br>The typical stats available as drawn from the main supply, are:<br><br>* minimal bus voltage (V)<br>* minimal current (A)<br>* maximal current (A)<br>* average power (W)<br>* max power (W)<br>* energy (instant power X sampling period) (J)<br><br>The color code indicates the trend compared to the previous build.",
+					    placement: "left"
+					  },
+					  {
+					    element: "#dynamic-0",
+					    title: "MAIN TEMPORAL CHART",
+					    placement: "top",
+					    content: "This chart is the temporal display of the power metrics recorded by the Power Probe during the test.<br>You can hide/show the different measurement signals by clicking on their label. You zoom/unzoom areas of the plot through holding the Left Mouse Button down, and precisely read the values under the cursors.<br>Be aware that long duration tests can lead to huge data sets (and longer refresh times) !"
+					  },
+					  {
+					    element: ".tourReg:first",
+					    title: "Regression curves",
+					    placement: "top",
+					    content: "For each metric, a regression curve is plotted.<br>The more instances of the test you run, the more points on the curve, to give you the trend of the kernel sources in this configuration, with this target."
+					  },
+					],
+					debug: true,
+					backdrop: true
+				});
 	} else {
 		throw Exception('Error while loading "' + page + '" tour', false);
 	}
