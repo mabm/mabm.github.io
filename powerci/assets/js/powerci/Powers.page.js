@@ -55,6 +55,7 @@ var Powers = {
 
 		$("[id^=compareBtn]").hide();
 		$('#compareView').hide();
+		$('#versionLabel').html('Version ' + this.confLoader.getAppVersion());
 
 		$('.more').click(function() {
 			me.loadBoots(++(me.page), false, false);
@@ -110,7 +111,7 @@ var Powers = {
 		    $(window).on('scroll', function () {
 		        backToTop();
 		    });
-		    
+
 		    $('#back-to-top').on('click', function (e) {
 		        e.preventDefault();
 		        $('html,body').animate({

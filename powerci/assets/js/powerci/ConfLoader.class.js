@@ -4,6 +4,7 @@ var ConfLoader = {
     lavaBaseURL : null,
     apiURL      : null,
     storageURL  : null,
+    appVersion  : null,
 
     /* Init method */
     load : function(file) {
@@ -32,6 +33,10 @@ var ConfLoader = {
                 me.storageURL = data.storageURL;
             else
                 throw new Exception("Storage URL (storageURL) not found into config file.");
+            if (data.appVersion)
+                me.appVersion = data.appVersion;
+            else
+                throw new Exception("App Version (appVersion) not found into config file.");
     	}).fail(function() {
     		throw new Exception("File '"+file+"' not found.");
     	});
@@ -51,5 +56,8 @@ var ConfLoader = {
     },
     getStorageURL : function () {
         return this.storageURL;
+    },
+    getAppVersion : function () {
+        return this.appVersion;
     }
 }

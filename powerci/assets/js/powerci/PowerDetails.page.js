@@ -339,5 +339,6 @@ var PowerDetails = {
 		$('#prevZone').html('<center><i class="fa fa-circle-o-notch fa-spin"></i></center>');
 		$('#previousBuildsPannel').height($('#staticCntnPannel').height());
 		$("[id^=dt_]").html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+		$('#versionLabel').html('Version ' + this.confLoader.getAppVersion());
 	}
 }
