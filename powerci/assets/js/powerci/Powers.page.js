@@ -279,9 +279,9 @@ var Powers = {
 				$.each(data.result, function(i, elem) {
 					var dKPIField = $('#default_kpi').val(); // Get default KPI selected by user
 					$('.dKPITab').html($('#default_kpi option:selected').text()); // Set column name to selected KPI
-
+					me.totalEntry++; // Count total entry
 					if (elem.test_plan == me.defaultTestPlan && elem.boot_result == "PASS" && $.isArray(elem.power_stats)) {
-						me.totalEntry++; // Count total entry
+						
 						if (!elem.power_stats) // Fetched boot does not have power values
 							return;
 
@@ -298,6 +298,10 @@ var Powers = {
 						
 						me.manageRegressionSelect(elem); // Call this function to change regression picto when select changes
 						me.calculateCurrentRegression(elem, dKPIField); // Call this function to set regression picto for actual regression
+					} else {
+						console.log(elem);
+						$('#mainTab').append('<tr id="'+elem._id.$id+'" class="myLine '+((elem.lastBuild) ? '' : '')+'" ><td colspan="13" class="text-center details text-danger" style="font-size:small"><i class="fa fa-exclamation"></i> Invalid syntax - Please, contact lab <i>'+elem.lab_name+'</i></td></tr>');
+
 					}
 				});
 				
