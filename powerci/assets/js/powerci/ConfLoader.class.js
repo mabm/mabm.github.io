@@ -1,8 +1,9 @@
 var ConfLoader = {
 	/* Attributes */
-    apiToken    : "",
+    apiToken    : null,
     lavaBaseURL : null,
-    apiURL      : "",
+    apiURL      : null,
+    storageURL  : null,
 
     /* Init method */
     load : function(file) {
@@ -27,6 +28,10 @@ var ConfLoader = {
 				me.apiURL = data.apiURL;
 			else
 				throw new Exception("API URL (apiURL) not found into config file.");
+            if (data.storageURL)
+                me.storageURL = data.storageURL;
+            else
+                throw new Exception("Storage URL (storageURL) not found into config file.");
     	}).fail(function() {
     		throw new Exception("File '"+file+"' not found.");
     	});
@@ -43,5 +48,8 @@ var ConfLoader = {
     },
     getApiURL : function () {
         return this.apiURL;
+    },
+    getStorageURL : function () {
+        return this.storageURL;
     }
 }
