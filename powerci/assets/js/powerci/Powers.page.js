@@ -12,6 +12,7 @@ var Powers = {
 	offset: null,
 	canScroll: true,
 	profilManager: Profils,
+	compareEnabled: {"active": false, "author": null},
 	searchQuery: null,
 
 	/* Methods */
@@ -53,7 +54,7 @@ var Powers = {
 	manageGUI: function() {
 		var me = this;
 
-		$("[id^=compareBtn]").hide();
+		//$("[id^=compareBtn]").hide();
 		$('#compareView').hide();
 		$('#versionLabel').html('Version ' + this.confLoader.getAppVersion());
 
@@ -88,7 +89,7 @@ var Powers = {
 			me.showTips('#tipsMain');
 		});
 
-		$("#compareBtn-test_desc").click(function() {
+		$("#compareBtn").click(function() {
 			me.generateCompareView();
 		});
 
@@ -269,15 +270,21 @@ var Powers = {
 		this.loadBoots(1, true, true);
 	},
 	allowCompare: function(elem, field) {
+		
+		
 		if ($('#' + elem).val() && $('#' + elem).val().length == 1) {
-			$('#compareBtn-' + field).show();
-			$('#' + elem).width('90%');
-			$('#' + elem).parent().find('.select2-container').width('90%');
+			if (this.compareEnabled.active == false) {
+				this.compareEnabled.active = true;
+				this.compareEnabled.author = field;	
+			}
 		} else {
-			$('#compareBtn-' + field).hide();
-			$('#' + elem).width('100%');
-			$('#' + elem).parent().find('.select2-container').width('100%');
+			if (this.compareEnabled.author == field)
+				this.compareEnabled.active = false;
 		}
+		if (this.compareEnabled.active)
+			$('#compareBtn').show();
+		else
+			$('#compareBtn').hide();
 	},
 	processRequest: function(me, generateQuery) {
 		$('#mainTab').html('');
