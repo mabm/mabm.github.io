@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('SMTP', 'smtp.orange.fr'); 
 ini_set('smtp_port', 25); 
 
-$mail = 'mtitinger@baylibre.com'; // Déclaration de l'adresse de destination.
+$mail = 'jbertomeu@baylibre.com'; // Déclaration de l'adresse de destination.
 if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
 {
 	$passage_ligne = "\r\n";
@@ -26,7 +26,7 @@ $sujet = "Test";
 //=========
  
 //=====Création du header de l'e-mail.
-$header = "From: \"Francois Hollande\"<fhollande@gouv.fr>".$passage_ligne;
+$header = "From: \"Benoît Cousson\"<fhollande@gouv.fr>".$passage_ligne;
 $header.= "Reply-to: \"Joris Bertoomeu\" <joris.bertomeu@epitech.eu>".$passage_ligne;
 $header.= "MIME-Version: 1.0".$passage_ligne;
 $header.= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
