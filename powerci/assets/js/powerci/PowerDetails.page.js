@@ -247,17 +247,6 @@ var PowerDetails = {
 						trackBorderColor: 'silver',
 						trackBorderRadius: 7
 				    },
-			        credits: {
-			            enabled: true,
-			            position: {
-			                align: 'left',
-			                x: 10,
-			                verticalAlign: 'bottom',
-			                y: -5
-			            },
-			            href: "http://www.baylibre.com",
-			            text: "Baylibre"
-			        },
 			        series: []
 				};
 

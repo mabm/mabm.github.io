@@ -17,7 +17,17 @@ function App(pageName) {
 			if (this.instance) {
 				this.instance.init(configFile); // Init our power/powersDetails instance
 				initMenu(this.instance.getTour()); // Init "Settings menu" with tour from instance
-				Highcharts.setOptions({lang: {numericSymbols: null}}); // Highcharts feature
+				Highcharts.setOptions({lang: {numericSymbols: null},credits: {
+			            enabled: true,
+			            position: {
+			                align: 'left',
+			                x: 10,
+			                verticalAlign: 'bottom',
+			                y: 0
+			            },
+			            href: "http://www.baylibre.com",
+			            text: "Baylibre"
+			        },}); // Highcharts feature
 			} else
 				throw new Exception('Unable to load requested page', true);
 		} catch (e) {
