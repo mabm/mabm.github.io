@@ -1,10 +1,10 @@
 function getUrlVars(param) {
-  var vars = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
-    function(m,key,value) {
-      vars[key] = value;
-    });
-  return vars[param];
+	var vars = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+		function(m, key, value) {
+			vars[key] = value;
+		});
+	return vars[param];
 }
 
 function errorMessage(msg) {
@@ -14,7 +14,7 @@ function errorMessage(msg) {
 		confirmButtonColor: "#EF5350",
 		html: true,
 		type: "error"
-	});	
+	});
 }
 
 function getFromJson(elem) {
@@ -24,18 +24,17 @@ function getFromJson(elem) {
 	return (elem);
 }
 
-function isScrolledIntoView(elem)
-{
-    var $elem = $(elem);
-    var $window = $(window);
+function isScrolledIntoView(elem) {
+	var $elem = $(elem);
+	var $window = $(window);
 
-    var docViewTop = $window.scrollTop();
-    var docViewBottom = docViewTop + $window.height();
+	var docViewTop = $window.scrollTop();
+	var docViewBottom = docViewTop + $window.height();
 
-    var elemTop = $elem.offset().top;
-    var elemBottom = elemTop + $elem.height();
+	var elemTop = $elem.offset().top;
+	var elemBottom = elemTop + $elem.height();
 
-    return ((elemBottom < docViewBottom) && (elemTop > docViewTop));
+	return ((elemBottom < docViewBottom) && (elemTop > docViewTop));
 }
 
 /* SETTINGS MENU LOGIC */

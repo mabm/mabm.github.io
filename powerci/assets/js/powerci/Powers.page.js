@@ -1,18 +1,18 @@
 var Powers = {
 	/* Attributes */
-	confLoader              : ConfLoader,
-	tour                    : null,
-	load                    : false,
-	page                    : 1,
-	resultPerPage           : 10,
-	defaultTestPlan         : "power",
-	totalEntry              : 0,
-	defaultRegressionPicto  : '<i class="fa fa-minus"></i>',
-	totalResults            : 0,
-	offset                  : null,
-	canScroll               : true,
-	profilManager           : Profils,
-	searchQuery             : null,
+	confLoader: ConfLoader,
+	tour: null,
+	load: false,
+	page: 1,
+	resultPerPage: 10,
+	defaultTestPlan: "power",
+	totalEntry: 0,
+	defaultRegressionPicto: '<i class="fa fa-minus"></i>',
+	totalResults: 0,
+	offset: null,
+	canScroll: true,
+	profilManager: Profils,
+	searchQuery: null,
 
 	/* Methods */
 	init: function(configFile) {
@@ -97,27 +97,27 @@ var Powers = {
 		});
 
 		if ($('#back-to-top').length) {
-		    var scrollTrigger = 100,
-		        backToTop = function () {
-		            var scrollTop = $(window).scrollTop();
-		            if (scrollTop > scrollTrigger) {
-		                $('#back-to-top').addClass('show');
-		            } else {
-		                $('#back-to-top').removeClass('show');
-		            }
-		        };
+			var scrollTrigger = 100,
+				backToTop = function() {
+					var scrollTop = $(window).scrollTop();
+					if (scrollTop > scrollTrigger) {
+						$('#back-to-top').addClass('show');
+					} else {
+						$('#back-to-top').removeClass('show');
+					}
+				};
 
-		    backToTop();
-		    $(window).on('scroll', function () {
-		        backToTop();
-		    });
+			backToTop();
+			$(window).on('scroll', function() {
+				backToTop();
+			});
 
-		    $('#back-to-top').on('click', function (e) {
-		        e.preventDefault();
-		        $('html,body').animate({
-		            scrollTop: 0
-		        }, 700);
-		    });
+			$('#back-to-top').on('click', function(e) {
+				e.preventDefault();
+				$('html,body').animate({
+					scrollTop: 0
+				}, 700);
+			});
 		}
 	},
 	manageBeforeLoading: function() {
@@ -128,12 +128,12 @@ var Powers = {
 	manageRegressionSelect: function(elem) {
 		var me = this;
 
-		$('.select-'+elem._id.$id).change(function() {
+		$('.select-' + elem._id.$id).change(function() {
 			if (!elem.regression || elem.regression.length <= 0)
 				return;
 			regPicto = me.defaultRegressionPicto;
 			target = $(this).attr('target');
-			$('#'+target+'_reg').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+			$('#' + target + '_reg').html('<i class="fa fa-circle-o-notch fa-spin"></i>');
 
 			if (elem.regression[0][$(this).val()] == "GT")
 				regPicto = '<i class="text-success icon-stairs-up"></i>';
@@ -141,7 +141,7 @@ var Powers = {
 				regPicto = '<i class="text-danger icon-stairs-down"></i>';
 			else if (elem.regression[0][$(this).val()] == 'EQ')
 				regPicto = '<i class="text-warning fa fa-equal"></i>';
-			$('#'+target+'_reg').html(regPicto);
+			$('#' + target + '_reg').html(regPicto);
 		})
 	},
 	calculateCurrentRegression: function(elem, dKPIField) {
@@ -156,8 +156,8 @@ var Powers = {
 			else if (elem.regression[0][dKPIField] == 'EQ')
 				regPicto = '<i class="text-warning fa fa-equal"></i>';
 		}
-		$('#'+elem._id.$id+'_reg').html(regPicto);
-		$('.selectReg option[value="'+dKPIField+'"]').attr("selected", true);
+		$('#' + elem._id.$id + '_reg').html(regPicto);
+		$('.selectReg option[value="' + dKPIField + '"]').attr("selected", true);
 	},
 	updateResultCounter: function() {
 		$('#fixed1').html(this.totalEntry + '/' + this.totalResults);
@@ -175,11 +175,17 @@ var Powers = {
 			method: "GET",
 			url: this.confLoader.getApiURL() + '/boot/list-content',
 			headers: {
-				"Authorization" : this.confLoader.getApiToken(),
-				"Content-Type" :"application/json"
+				"Authorization": this.confLoader.getApiToken(),
+				"Content-Type": "application/json"
 			},
 			success: function(data) {
-				me.searchQuery = {'sort':{'field': 'date', 'type':'DESC'}, 'criterias':{}};
+				me.searchQuery = {
+					'sort': {
+						'field': 'date',
+						'type': 'DESC'
+					},
+					'criterias': {}
+				};
 				me.searchQuery.criterias['arch'] = Array();
 				$.each(data.result.archs, function(i, elem) {
 					me.searchQuery.criterias['arch'].push(elem);
@@ -221,11 +227,11 @@ var Powers = {
 		});
 	},
 	initInfiniteScroll: function() {
-		var offset = $('.myLine:last').offset(); 
+		var offset = $('.myLine:last').offset();
 		var me = this;
-	 
+
 		$(window).scroll(function() {
-			
+
 			if (isScrolledIntoView("#tableHeader")) {
 				$('#tableHeaderFixed').hide();
 			} else if ($(window).scrollTop() > $('#firstBloc').height()) {
@@ -235,9 +241,9 @@ var Powers = {
 
 			me.updateInvertedTabHeader();
 
-			if ((offset.top - $(window).height() <= $(window).scrollTop()) && !me.load && 
+			if ((offset.top - $(window).height() <= $(window).scrollTop()) && !me.load &&
 				($('.myLine').size() >= 5) && me.canScroll) {
-					me.loadBoots(++(me.page), false, false);
+				me.loadBoots(++(me.page), false, false);
 			}
 		});
 	},
@@ -245,7 +251,13 @@ var Powers = {
 		var me = this;
 
 		if (generateQuery) {
-			this.searchQuery = {'sort':{'field': $('#sort_select').val().split("_")[0], 'type':$('#sort_select').val().split("_")[1]}, 'criterias':{}};
+			this.searchQuery = {
+				'sort': {
+					'field': $('#sort_select').val().split("_")[0],
+					'type': $('#sort_select').val().split("_")[1]
+				},
+				'criterias': {}
+			};
 			$("[id^=select-]").each(function(i, elem) {
 				if ($(elem).val())
 					me.searchQuery.criterias[$(elem).attr('field')] = $(elem).val();
@@ -271,7 +283,9 @@ var Powers = {
 		$('#mainTab').html('');
 
 		if (this.load) {
-			me.effect( "highlight", {color: 'red'}, 400);
+			me.effect("highlight", {
+				color: 'red'
+			}, 400);
 			return;
 		}
 		this.page = 1;
@@ -297,8 +311,8 @@ var Powers = {
 			data: JSON.stringify(this.searchQuery),
 			url: this.confLoader.getApiURL() + '/boot/search?nbr=' + this.resultPerPage + '&p=' + this.page,
 			headers: {
-				"Authorization" : this.confLoader.getApiToken(),
-				"Content-Type" : "application/json"
+				"Authorization": this.confLoader.getApiToken(),
+				"Content-Type": "application/json"
 			},
 			success: function(data) {
 				$.each(data.result, function(i, elem) {
@@ -306,7 +320,7 @@ var Powers = {
 					$('.dKPITab').html($('#default_kpi option:selected').text()); // Set column name to selected KPI
 					me.totalEntry++; // Count total entry
 					if (elem.test_plan == me.defaultTestPlan && elem.boot_result == "PASS" && $.isArray(elem.power_stats)) {
-						
+
 						if (!elem.power_stats) // Fetched boot does not have power values
 							return;
 
@@ -319,20 +333,20 @@ var Powers = {
 								return false;
 						});
 						// Add each boots into tab
-						$('#mainTab').append('<tr '+((elem.lastBuild) ? 'style="font-weight: bold;"' : '')+' id="'+elem._id.$id+'" class="myLine '+((elem.lastBuild) ? '' : '')+'" ><td class="hidden-md hidden-sm hidden-xs" id="'+elem._id.$id+'"><i class="fa fa-'+((elem.lastBuild) ? 'arrow-right' : 'child')+'"></i></td><td>'+elem.job+'</td><td>'+elem.kernel+'</td><td>'+elem.board+'</td><td><span data-toggle="tooltip" data-placement="top" title="'+elem.defconfig_full+'">'+elem.defconfig+'</span></td><td>'+getFromJson(elem.test_desc)+'</td><td>'+meCumulNRJ+'</td><td class="hidden-md hidden-sm hidden-xs">'+elem.arch+'</td><td class="text-center"><select target="'+elem._id.$id+'" class="selectReg select-'+elem._id.$id+'" class="form-control"> <option value="energy">Energy</option> <option value="power_min">Power Min</option> <option value="power_avg">Power AVG</option> <option value="power_max">Power Max</option> <option value="current_min">Current Min</option> <option value="current_max">Current Max</option> <option value="vbus_max">Voltage Max</option></select></td><td id="'+elem._id.$id+'_reg" class="text-center trend"><i class="fa fa-circle-o-notch fa-spin"></i></td><td class="hidden-md hidden-sm hidden-xs">'+elem.lab_name+'</td><td class="hidden-md hidden-sm hidden-xs">'+moment.unix(elem.date).format("DD/MM/YY HH:mm:ss")+'</td><td class="text-center details"><a href="power_details?id='+elem._id.$id+'"><i class="icon-search4"></i> Details</a></td></tr>');
-						
+						$('#mainTab').append('<tr ' + ((elem.lastBuild) ? 'style="font-weight: bold;"' : '') + ' id="' + elem._id.$id + '" class="myLine ' + ((elem.lastBuild) ? '' : '') + '" ><td class="hidden-md hidden-sm hidden-xs" id="' + elem._id.$id + '"><i class="fa fa-' + ((elem.lastBuild) ? 'arrow-right' : 'child') + '"></i></td><td>' + elem.job + '</td><td>' + elem.kernel + '</td><td>' + elem.board + '</td><td><span data-toggle="tooltip" data-placement="top" title="' + elem.defconfig_full + '">' + elem.defconfig + '</span></td><td>' + getFromJson(elem.test_desc) + '</td><td>' + meCumulNRJ + '</td><td class="hidden-md hidden-sm hidden-xs">' + elem.arch + '</td><td class="text-center"><select target="' + elem._id.$id + '" class="selectReg select-' + elem._id.$id + '" class="form-control"> <option value="energy">Energy</option> <option value="power_min">Power Min</option> <option value="power_avg">Power AVG</option> <option value="power_max">Power Max</option> <option value="current_min">Current Min</option> <option value="current_max">Current Max</option> <option value="vbus_max">Voltage Max</option></select></td><td id="' + elem._id.$id + '_reg" class="text-center trend"><i class="fa fa-circle-o-notch fa-spin"></i></td><td class="hidden-md hidden-sm hidden-xs">' + elem.lab_name + '</td><td class="hidden-md hidden-sm hidden-xs">' + moment.unix(elem.date).format("DD/MM/YY HH:mm:ss") + '</td><td class="text-center details"><a href="power_details?id=' + elem._id.$id + '"><i class="icon-search4"></i> Details</a></td></tr>');
+
 						me.manageRegressionSelect(elem); // Call this function to change regression picto when select changes
 						me.calculateCurrentRegression(elem, dKPIField); // Call this function to set regression picto for actual regression
 					} else {
 						console.log(elem);
-						$('#mainTab').append('<tr id="'+elem._id.$id+'" class="myLine '+((elem.lastBuild) ? '' : '')+'" ><td colspan="13" class="text-center details text-danger" style="font-size:small"><i class="fa fa-exclamation"></i> Invalid syntax - Please, contact lab <i>'+elem.lab_name+'</i></td></tr>');
+						$('#mainTab').append('<tr id="' + elem._id.$id + '" class="myLine ' + ((elem.lastBuild) ? '' : '') + '" ><td colspan="13" class="text-center details text-danger" style="font-size:small"><i class="fa fa-exclamation"></i> Invalid syntax - Please, contact lab <i>' + elem.lab_name + '</i></td></tr>');
 
 					}
 				});
-				
+
 				me.updateResultCounter();
 				me.updateInvertedTabHeader(); // Update columns width for the inverted table's header
-				
+
 				$('[data-toggle="tooltip"]').tooltip(); // Enable tooltips for defconfig_full
 
 				if (first) me.initInfiniteScroll(); // Enable infinite scroll if this is first call
@@ -381,82 +395,82 @@ var Powers = {
 
 		this.generateCriterias(true); // Regenerate criteria for compare view
 		$.ajax({
-				method: "PUT",
-				data: JSON.stringify(me.searchQuery),
-				headers: {
-					"Authorization" : this.confLoader.getApiToken(),
-					"Content-Type" :"application/json"
-				},
-				url: this.confLoader.getApiURL() + '/graph/boot/compare',
-				success: function(data) {
-					elemm = data.result[0];
-					$('#compareGraph').highcharts({
-						chart: {
-			                zoomType: 'x',
-			                renderTo: 'container',
-			                type: elemm.type
-			            },
-				        title: {
-				            text: elemm.title + ' - ' + $('#select-test_desc').val(),
-				            margin: 65,
-				            x: -20 //center
-				        },
-				        plotOptions: {
-				            column: {
-				                pointPadding: 0.2,
-				                borderWidth: 0.5
-				            }
-				        },
-				        xAxis: {
-				            categories: elemm.xAxis,
-				            labels: {
-				            	useHTML: true,
-				            	rotation: -90,
-				            	style: {
-							        "textOverflow": "none"
-							      }
-				            }
-				        },
-				        scrollbar: {
-				            enabled:true,
-							barBackgroundColor: 'gray',
-							barBorderRadius: 7,
-							barBorderWidth: 0,
-							buttonBackgroundColor: 'gray',
-							buttonBorderWidth: 0,
-							buttonArrowColor: 'yellow',
-							buttonBorderRadius: 7,
-							rifleColor: 'yellow',
-							trackBackgroundColor: 'white',
-							trackBorderWidth: 1,
-							trackBorderColor: 'silver',
-							trackBorderRadius: 7
-					    },
-				        yAxis: {
-				            title: {
-				                text: elemm.unit
-				            },
-				            plotLines: [{
-				                value: 0,
-				                width: 1,
-				                color: '#808080'
-				            }]
-				        },
-				        legend: {
-				            align: 'center',
-				            verticalAlign: 'top',
-				            floating: true,
-				            x: 0,
-				            y: 30
-				        },
-				        series: elemm.series
-				    });
+			method: "PUT",
+			data: JSON.stringify(me.searchQuery),
+			headers: {
+				"Authorization": this.confLoader.getApiToken(),
+				"Content-Type": "application/json"
+			},
+			url: this.confLoader.getApiURL() + '/graph/boot/compare',
+			success: function(data) {
+				elemm = data.result[0];
+				$('#compareGraph').highcharts({
+					chart: {
+						zoomType: 'x',
+						renderTo: 'container',
+						type: elemm.type
+					},
+					title: {
+						text: elemm.title + ' - ' + $('#select-test_desc').val(),
+						margin: 65,
+						x: -20 //center
+					},
+					plotOptions: {
+						column: {
+							pointPadding: 0.2,
+							borderWidth: 0.5
+						}
+					},
+					xAxis: {
+						categories: elemm.xAxis,
+						labels: {
+							useHTML: true,
+							rotation: -90,
+							style: {
+								"textOverflow": "none"
+							}
+						}
+					},
+					scrollbar: {
+						enabled: true,
+						barBackgroundColor: 'gray',
+						barBorderRadius: 7,
+						barBorderWidth: 0,
+						buttonBackgroundColor: 'gray',
+						buttonBorderWidth: 0,
+						buttonArrowColor: 'yellow',
+						buttonBorderRadius: 7,
+						rifleColor: 'yellow',
+						trackBackgroundColor: 'white',
+						trackBorderWidth: 1,
+						trackBorderColor: 'silver',
+						trackBorderRadius: 7
+					},
+					yAxis: {
+						title: {
+							text: elemm.unit
+						},
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					legend: {
+						align: 'center',
+						verticalAlign: 'top',
+						floating: true,
+						x: 0,
+						y: 30
+					},
+					series: elemm.series
+				});
 
-				    for (i = 0; i < $('#compareGraph').highcharts().series.length; i++) {
-				    	if ($('#compareGraph').highcharts().series[i].name != $('#default_kpi option:selected').text())
-				    		$('#compareGraph').highcharts().series[i].hide();
-				    }
+				for (i = 0; i < $('#compareGraph').highcharts().series.length; i++) {
+					if ($('#compareGraph').highcharts().series[i].name != $('#default_kpi option:selected').text())
+						$('#compareGraph').highcharts().series[i].hide();
 				}
+			}
 		});
 	}
 }

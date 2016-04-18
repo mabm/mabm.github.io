@@ -1,5 +1,5 @@
 var Profils = {
-	powerInstance : null,
+	powerInstance: null,
 
 	init: function(powerInstance) {
 		this.powerInstance = powerInstance;
@@ -29,7 +29,10 @@ var Profils = {
 		return null;
 	},
 	newProfil: function(profilName, searchQuery) {
-		var profil = {'name':profilName, 'query':JSON.stringify(searchQuery)};
+		var profil = {
+			'name': profilName,
+			'query': JSON.stringify(searchQuery)
+		};
 		var profils = this.getProfils();
 
 		if (!profils) {
@@ -48,8 +51,8 @@ var Profils = {
 		$('#profilTable').html('');
 		if (profils) {
 			$.each(profils, function(i, elem) {
-				$('#profilList').append('<li><a query="'+elem.name+'" class="profilElem"><i class="fa fa-cube"></i>'+elem.name+'</a></li>');
-				$('#profilTable').append('<tr><td>'+elem.name+'</td><td class="text-center"><a query="'+elem.name+'" class="removeProfil"><i class="fa fa-trash"></i> Supprimer</a></td></tr>');
+				$('#profilList').append('<li><a query="' + elem.name + '" class="profilElem"><i class="fa fa-cube"></i>' + elem.name + '</a></li>');
+				$('#profilTable').append('<tr><td>' + elem.name + '</td><td class="text-center"><a query="' + elem.name + '" class="removeProfil"><i class="fa fa-trash"></i> Supprimer</a></td></tr>');
 			});
 		}
 
@@ -67,9 +70,9 @@ var Profils = {
 					i++;
 				}
 				if (index > -1) {
-				    profils.splice(index, 1);
-				    me.saveProfil(profils);
-				    me.displayProfils();
+					profils.splice(index, 1);
+					me.saveProfil(profils);
+					me.displayProfils();
 				}
 			}
 		});
@@ -79,11 +82,11 @@ var Profils = {
 			powerInstance.processRequest($('#searchBtn'), false);
 		});
 		$('#new_profil').click(function() {
-	        bootbox.prompt("Enter profile name", function(result) {
-	            if (result) {
-	            	me.newProfil(result);
-	            }
-	        });
+			bootbox.prompt("Enter profile name", function(result) {
+				if (result) {
+					me.newProfil(result);
+				}
+			});
 		})
 	}
 }
