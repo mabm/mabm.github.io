@@ -205,7 +205,8 @@ var PowerDetails = {
 			dataType: 'html',
 			url: this.confLoader.getStorageURL() + '/attachments/' + elem.data + '/' + elem.filename,
 			success: function(csv) {
-				$('#graphContainer').append('<div class="col-lg-12"><div id="dynamic-' + unused + '" class="panel panel-flat"><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chartLoading text-center"><br><br><br><br><br><br><h1>Loading ...</h1></div><div class="chart" id="chart-' + unused + '"></div><br><div style="width:50%" id="slider-threshold" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><span style="position:absolute;left:0px;top:7px"><b>Coarse (fast)</b></span> <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.080032%;"></a><span style="position:absolute;right:0px;top:7px"><b>Fine (slow)</b></span></div><span id="sliderVal"></span> buckets</center><br><table class="table"> <tr> <td>Power Min</td><td>Power AVG</td><td>Power Max</td><td>Current Min</td><td>Current Max</td><td>Voltage Max</td><td>Energy</td></tr><tr> <td id="pmin_' + unused + '"></td><td id="pavg_' + unused + '"></td><td id="pmax_' + unused + '"></td><td id="cmin_' + unused + '"></td><td id="cmax_' + unused + '"></td><td id="vmax_' + unused + '"></td><td id="nrj_' + unused + '"></td></tr></table></div></div></div></div></div>');
+				$('#prevTable').prepend('<tr> <td class="text-center">Current build &nbsp;<i class="fa fa-arrow-right"></i></td><td class="currentBuild" id="pmin_' + unused + '"></td><td class="currentBuild" id="pavg_' + unused + '"></td><td class="currentBuild" id="pmax_' + unused + '"></td><td  class="currentBuild" id="cmin_' + unused + '"></td><td class="currentBuild" id="cmax_' + unused + '"></td><td class="currentBuild" id="vmax_' + unused + '"></td><td  class="currentBuild" id="nrj_' + unused + '"></td>');
+				$('#graphContainer').append('<div class="col-lg-12"><div id="dynamic-' + unused + '" class="panel panel-flat"><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chartLoading text-center"><br><br><br><br><br><br><h1>Loading ...</h1></div><div class="chart" id="chart-' + unused + '"></div><br><div style="width:50%" id="slider-threshold" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><span style="position:absolute;left:0px;top:7px"><b>Coarse (fast)</b></span> <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.080032%;"></a><span style="position:absolute;right:0px;top:7px"><b>Fine (slow)</b></span></div><span id="sliderVal"></span> buckets</center><br></div></div></div></div></div>');
 				$('.chartLoading').hide();
 				Highcharts.setOptions({
 					lang: {
@@ -327,6 +328,9 @@ var PowerDetails = {
 	manageGUI: function() {
 		$('#prevZone').html('<center><i class="fa fa-circle-o-notch fa-spin"></i></center>');
 		$('#previousBuildsPannel').height($('#staticCntnPannel').height());
+		$( window ).resize(function() {
+			$('#previousBuildsPannel').height($('#staticCntnPannel').height());
+		});
 		$("[id^=dt_]").html('<i class="fa fa-circle-o-notch fa-spin"></i>');
 		$('#versionLabel').html('Version ' + this.confLoader.getAppVersion());
 	}

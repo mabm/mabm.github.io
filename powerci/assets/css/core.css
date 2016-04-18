@@ -65,6 +65,28 @@
 	margin:1%;
 }
 
+.currentBuild {
+    color:white;
+    background-color: black;
+}
+
+.legendContainer {
+	bottom: 5px;
+    text-align: center;
+    width: 60%;
+    margin-left: 25%;
+}
+
+/* basic positioning */
+.legend { list-style: none; }
+.legend li { float: left; margin-right: 10px; }
+.legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }
+/* your colors */
+.legend .blueLegend { background-color: rgba(52, 152, 219, .5); }
+.legend .greenLegend { background-color: rgba(46, 204, 113, .5); }
+.legend .redLegend { background-color: rgba(231, 76, 60, .5); }
+
+
 .push_button{
 	position:relative;
 	display:block;

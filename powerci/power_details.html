@@ -279,7 +279,7 @@
 						<!-- Traffic sources -->
 						<div class="panel panel-flat" id="tourPrevious" style="font-size:x-small">
 							<div class="panel-heading">
-								<h5 class="panel-title"><b id="previousBuildTitle">Previous builds</b></h5>
+								<h5 class="panel-title"><b id="previousBuildTitle">Build history</b></h5>
 								<div class="heading-elements">
 									<ul class="icons-list">
 				                		<li><a data-action="collapse"></a></li>
@@ -289,6 +289,13 @@
 							<div class="panel-body" id="previousBuildsPannel" style="overflow-y:auto;">
 								<div class="container-fluid">
 									<div class="row">
+										<div class="legendContainer">
+											<ul class="legend text-center">
+												<li><span class="blueLegend"></span> Equal value</li>
+												<li><span class="greenLegend"></span> Value lower than current build</li>
+												<li><span class="redLegend"></span> Value greater than current build</li>
+											</ul>
+										</div>
 										<table class="table">
 										   <thead>
 										      <tr>
