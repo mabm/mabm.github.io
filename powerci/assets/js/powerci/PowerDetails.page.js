@@ -44,7 +44,7 @@ var PowerDetails = {
 				var result = data.result;
 				power_stats = result.power_stats[0];
 
-				me.fillRegTab(); // Fill "previous builds" table
+				me.fillRegTab(); // Fill "Build history" table
 				me.fillDetails(result); // Fill "Details" bloc
 
 				$.each(result.power_stats, function(unused, elem) {
