@@ -3,5 +3,6 @@
 	"lavaBaseURL": "http://lava.baylibre.com:10080/dashboard/streams/anonymous/powerci/bundles/",
 	"apiURL": "http://powerci.org:9999",
 	"storageURL": "http://powerci.org:8889",
-	"appVersion": "0.02"
+	"appVersion": "0.03",
+	"debugLevel": "1"
 }
