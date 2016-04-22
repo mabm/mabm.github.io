@@ -4,5 +4,5 @@
 	"apiURL": "http://powerci.org:9999",
 	"storageURL": "http://powerci.org:8889",
 	"appVersion": "0.03",
-	"debugLevel": "1"
+	"debugLevel": "2"
 }

@@ -59,6 +59,11 @@ var ConfLoader = {
                 }
             });
         }).fail(function() {
+            debug({
+                "ref": me,
+                "from": "ConfLoader",
+                "lvl1": "Config file not found .."
+            });
             throw new Exception("File '" + file + "' not found.");
         });
 

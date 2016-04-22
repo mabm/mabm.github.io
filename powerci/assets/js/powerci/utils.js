@@ -48,9 +48,21 @@ function debug(o) {
 	if (!o.ref || o.ref.getDebugLevel() == 0)
 		return;
 	var message = eval('o.lvl' + o.ref.getDebugLevel());
-	if (message === undefined)
-		return;
-	var base = "[" + getTime() + " -> " + ((o.from) ? o.from : 'Unknown') + "]";
+	var level = o.ref.getDebugLevel();
+	if (message === undefined) {
+		var found = false;
+		for (i = eval(o.ref.getDebugLevel()); i > 0; i--) {
+			message = eval('o.lvl' + i);
+			if (message !== undefined) {
+				found = true;
+				level = i;
+				break;
+			}
+		}
+		if (!found)
+			return;
+	}
+	var base = "[" + getTime() + " - " + level + " -> " + ((o.from) ? o.from : 'Unknown') + "]";
 	if (isFunction(message)) {
 		console.log("%c<-----" + base + '----->\n', 'font-weight: bold');
 		console.log(message());
