@@ -23,21 +23,21 @@
 
 .fixedElem {
 	position: fixed;
-	right:0px;
+	left:0px;
 	bottom:5%;
 	background-color: white;
 	z-index: 6;
 	padding: 10px;
 	border: 1px solid black;
 	color: black;
-	border-radius: 10px 0px 0px 10px;
-	border-right-color: white;
+	border-radius: 0px 10px 10px 0px;
+	border-left-color: white;
 }
 
 #back-to-top {
     position: fixed;
-    bottom: 40px;
-    left: 20px;
+    bottom: 5%;
+    right: 10px;
     z-index: 9999;
     width: 32px;
     height: 32px;
