@@ -44,6 +44,14 @@ function isFunction(functionToCheck) {
  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
 
+function generateDash(o) {
+	var ret = '';
+	
+	for (i = 0; i < o.length - 2; i++)
+		ret += '-';
+	return ret;
+}
+
 function debug(o) {
 	if (!o.ref || o.ref.getDebugLevel() == 0)
 		return;
@@ -64,9 +72,12 @@ function debug(o) {
 	}
 	var base = "[" + getTime() + " - " + level + " -> " + ((o.from) ? o.from : 'Unknown') + "]";
 	if (isFunction(message)) {
-		console.log("%c<-----" + base + '----->\n', 'font-weight: bold');
-		console.log(message());
-		console.log("%c<------------>", 'font-weight: bold');
+		var bStart = '<-----' + base + '----->';
+		console.log("%c" + bStart + "\n", 'font-weight: bold');
+		var msg = message();
+		if (msg !== undefined)
+			console.log(msg);
+		console.log("%c<" + generateDash(bStart) + ">", 'font-weight: bold');
 	} else {
 		console.log();
 		console.log("%c" + base + '%c ' + message, 'font-weight: bold', 'font-weight: none');

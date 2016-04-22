@@ -9,7 +9,7 @@ var PowerDetails = {
 
 		try {
 			this.confLoader.load(configFile).done(function() {
-				me.tour = initTour('powerDetails'); // Init powers tour
+				me.tour = initTour('powerDetails', confLoader); // Init powers tour
 				me.manageGUI(); // Hide/show elments into DOM and trigger click/change ..
 				if (localStorage.getItem('tour_end') != "yes") {
 					localStorage.removeItem('tour_current_step');
@@ -42,6 +42,15 @@ var PowerDetails = {
 				}
 
 				var result = data.result;
+				debug({
+					"ref": me.confLoader,
+					"from": "PowerDetails",
+					"lvl4": function() {
+						console.log("Search Results : ");
+						console.log(result);
+						return;	
+					}
+				});
 				power_stats = result.power_stats[0];
 
 				me.fillRegTab(); // Fill "Build history" table
@@ -64,6 +73,16 @@ var PowerDetails = {
 				me.generateAllRegressionTabs();
 			},
 			error: function(data) {
+				debug({
+					"ref": me.confLoader,
+					"from": "PowerDetails",
+					"lvl1": "Error while requesting search endpoint",
+					"lvl2": function() {
+						console.log("Error while requesting search endpoint : ");
+						console.log(data);
+						return;	
+					}
+				});
 				errorMessage('API is maybe down ?');
 			}
 		});

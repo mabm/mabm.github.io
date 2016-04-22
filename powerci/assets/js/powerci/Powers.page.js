@@ -21,7 +21,7 @@ var Powers = {
 
 		try {
 			this.confLoader.load(configFile).done(function() {
-				me.tour = initTour('powers'); // Init powers tour
+				me.tour = initTour('powers', me.confLoader); // Init powers tour
 				showTips('#tipsMain'); // Call function which will show or not tips by reading SessionStorage
 				me.tour.init(); // Init tour AFTER "showTips"
 				me.manageTips();

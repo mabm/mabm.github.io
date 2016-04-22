@@ -1,6 +1,8 @@
-function initTour(page) {
+function initTour(page, confLoader) {
+	var tour;
+	
 	if (page == "powers") {
-		return new Tour({
+		tour = new Tour({
 			steps: [{
 				element: "#tipsMain",
 				title: "Tips & tour",
@@ -57,12 +59,12 @@ function initTour(page) {
 				content: "This brings you to the detailed view of the selected test job:<br><br>* temporal chart of the power measurements<br>* Performance Metrics trend charts (when this test was run for different kernel builds)<br>* test job details and link to LAVA result bundle.",
 				path: "power_details?id=5704d2aefe87c9bd48bbbbab"
 			}, ],
-			debug: true,
+			debug: false,
 			backdrop: true
 		});
 
 	} else if (page == "powerDetails") {
-		return new Tour({
+		tour = new Tour({
 			steps: [{
 				element: "#staticCntn",
 				title: "Report details",
@@ -87,10 +89,21 @@ function initTour(page) {
 				placement: "top",
 				content: "For each metric, a regression curve is plotted.<br>The more instances of the test you run, the more points on the curve, to give you the trend of the kernel sources in this configuration, with this target."
 			}, ],
-			debug: true,
+			debug: false,
 			backdrop: true
 		});
 	} else {
 		throw Exception('Error while loading "' + page + '" tour', false);
 	}
+	 debug({
+		"ref": confLoader,
+		"from": "InitTour",
+		"lvl1": "Tour plugin loaded succcessfully !",
+		"lvl4": function() {
+			console.log("Tour plugin loaded succcessfully : ");
+			console.log(tour);
+			return;	
+		}
+	});
+	return tour;
 }
