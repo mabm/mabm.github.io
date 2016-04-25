@@ -180,6 +180,15 @@ var Powers = {
 				"Content-Type": "application/json"
 			},
 			success: function(data) {
+				debug({
+					"ref": me.confLoader,
+					"from": "Power - listContent",
+					"lvl1": "Content listed",
+					"lvl2": function() {
+						console.log("Content listed");
+						console.log(data);
+					}
+				});
 				me.searchQuery = {
 					'sort': {
 						'field': 'date',
@@ -224,6 +233,15 @@ var Powers = {
 				});
 				me.totalResults = data.result.boots_total;
 				$('#searchBtn').html('<i class="fa fa-refresh"></i> Search among ' + me.totalResults + ' records');
+				debug({
+					"ref": me.confLoader,
+					"from": "Power - listContent",
+					"lvl1": "Query initialized",
+					"lvl2": function() {
+						console.log("Query initialized");
+						console.log(me.searchQuery);
+					}
+				});
 			}
 		});
 	},
@@ -264,6 +282,15 @@ var Powers = {
 					me.searchQuery.criterias[$(elem).attr('field')] = $(elem).val();
 			});
 		}
+		debug({
+			"ref": me.confLoader,
+			"from": "Power - generateCriterias",
+			"lvl1": "New query generated",
+			"lvl2": function() {
+				console.log("New query generated");
+				console.log(me.searchQuery);
+			}
+		});
 	},
 	generateTab: function() {
 		$('#mainTab').html('');
@@ -322,15 +349,31 @@ var Powers = {
 				"Content-Type": "application/json"
 			},
 			success: function(data) {
+				debug({
+					"ref": me.confLoader,
+					"from": "Power - loadBoots",
+					"lvl1": "Search query for " + me.confLoader.getApiURL() + '/boot/search?nbr=' + me.resultPerPage + '&p=' + me.page,
+					"lvl3": function() {
+						console.log("Search query for " + me.confLoader.getApiURL() + '/boot/search?nbr=' + me.resultPerPage + '&p=' + me.page);
+						console.log(data);
+					}
+				});
 				$.each(data.result, function(i, elem) {
 					var dKPIField = $('#default_kpi').val(); // Get default KPI selected by user
 					$('.dKPITab').html($('#default_kpi option:selected').text()); // Set column name to selected KPI
 					me.totalEntry++; // Count total entry
 					if (elem.test_plan == me.defaultTestPlan && elem.boot_result == "PASS" && $.isArray(elem.power_stats)) {
-
+						
 						if (!elem.power_stats) // Fetched boot does not have power values
 							return;
-
+						debug({
+							"ref": me.confLoader,
+							"from": "Power - loadBoots",
+							"lvl2": function() {
+								console.log("Loop over VALID BOOT from search result " + elem._id.$id);
+								console.log(elem);
+							}
+						});
 						var meCumulNRJ = 0;
 						$.each(elem.power_stats, function(ii, ps) {
 							if (ps[dKPIField] == "00.00")
@@ -345,7 +388,14 @@ var Powers = {
 						me.manageRegressionSelect(elem); // Call this function to change regression picto when select changes
 						me.calculateCurrentRegression(elem, dKPIField); // Call this function to set regression picto for actual regression
 					} else {
-						console.log(elem);
+						debug({
+							"ref": me.confLoader,
+							"from": "Power - loadBoots",
+							"lvl1": function() {
+								console.log("Loop over INVALID BOOT from search result " + elem._id.$id);
+								console.log(elem);
+							}
+						});
 						$('#mainTab').append('<tr id="' + elem._id.$id + '" class="myLine ' + ((elem.lastBuild) ? '' : '') + '" ><td colspan="13" class="text-center details text-danger" style="font-size:small"><i class="fa fa-exclamation"></i> Invalid syntax - Please, contact lab <i>' + elem.lab_name + '</i></td></tr>');
 
 					}
@@ -410,6 +460,15 @@ var Powers = {
 			},
 			url: this.confLoader.getApiURL() + '/graph/boot/compare',
 			success: function(data) {
+				debug({
+					"ref": me.confLoader,
+					"from": "Power - generateCompareView",
+					"lvl1": "Compare boot requested -> " + me.confLoader.getApiURL() + '/graph/boot/compare',
+					"lvl2": function() {
+						console.log("Compare boot requested -> " + me.confLoader.getApiURL() + '/graph/boot/compare');
+						console.log(data);
+					}
+				});
 				elemm = data.result[0];
 				$('#compareGraph').highcharts({
 					chart: {

@@ -36,7 +36,8 @@ function getTime() {
     var h = addZero(d.getHours());
     var m = addZero(d.getMinutes());
     var s = addZero(d.getSeconds());
-    return h + ":" + m + ":" + s;
+	var ms = addZero(d.getMilliseconds());
+    return h + ":" + m + ":" + s + ":" + ms;
 }
 
 function isFunction(functionToCheck) {

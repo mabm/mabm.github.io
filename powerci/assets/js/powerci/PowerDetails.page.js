@@ -9,7 +9,7 @@ var PowerDetails = {
 
 		try {
 			this.confLoader.load(configFile).done(function() {
-				me.tour = initTour('powerDetails', confLoader); // Init powers tour
+				me.tour = initTour('powerDetails', me.confLoader); // Init powers tour
 				me.manageGUI(); // Hide/show elments into DOM and trigger click/change ..
 				if (localStorage.getItem('tour_end') != "yes") {
 					localStorage.removeItem('tour_current_step');
@@ -44,7 +44,7 @@ var PowerDetails = {
 				var result = data.result;
 				debug({
 					"ref": me.confLoader,
-					"from": "PowerDetails",
+					"from": "PowerDetails - launch",
 					"lvl4": function() {
 						console.log("Search Results : ");
 						console.log(result);
@@ -75,7 +75,7 @@ var PowerDetails = {
 			error: function(data) {
 				debug({
 					"ref": me.confLoader,
-					"from": "PowerDetails",
+					"from": "PowerDetails - launch",
 					"lvl1": "Error while requesting search endpoint",
 					"lvl2": function() {
 						console.log("Error while requesting search endpoint : ");
@@ -88,6 +88,8 @@ var PowerDetails = {
 		});
 	},
 	generateAllRegressionTabs: function() {
+		var me = this;
+		
 		$.ajax({
 			type: "GET",
 			async: true,
@@ -97,8 +99,26 @@ var PowerDetails = {
 			},
 			url: this.confLoader.getApiURL() + '/graph/boot/regression/' + getUrlVars('id'),
 			success: function(data) {
+				debug({
+					"ref": me.confLoader,
+					"from": "PowerDetails - generateAllRegressionTabs",
+					"lvl1": "URL requested : " + me.confLoader.getApiURL() + '/graph/boot/regression/' + getUrlVars('id'),
+					"lvl2": function() {
+						console.log("URL requested : " + me.confLoader.getApiURL() + '/graph/boot/regression/' + getUrlVars('id'));
+						console.log(data);
+					}
+				});
 				$.each(data.result, function(i, elem) {
 					$.each(elem.series, function(ii, elemm) {
+						debug({
+							"ref": me.confLoader,
+							"from": "PowerDetails - generateAllRegressionTabs",
+							"lvl1": "New regression chart : " + elem.title + " - " + elemm.name,
+							"lvl2": function() {
+								console.log("New regression chart : " + elem.title + " - " + elemm.name);
+								console.log(elemm);
+							}
+						});
 						$('#graphContainer').append('<div class="col-lg-6"><div class="panel panel-flat tourReg"><div class="panel-heading"><h5 class="panel-title"><b>' + elem.title + ' - ' + elemm.name + '</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><div class="col-lg-12" id="chartr-' + ii + '">' + elem.unit + '</div></div></div></div></div></div>');
 						$('#chartr-' + ii).highcharts('StockChart', {
 							chart: {
@@ -155,6 +175,7 @@ var PowerDetails = {
 		});
 	},
 	fillRegTab: function() {
+		var me = this;
 		var red = "rgba(231, 76, 60, .5)";
 		var green = "rgba(46, 204, 113, .5)";
 		var orange = "rgba(52, 152, 219, .5)";
@@ -167,6 +188,15 @@ var PowerDetails = {
 				"Content-Type": "application/json"
 			},
 			success: function(data) {
+				debug({
+					"ref": me.confLoader,
+					"from": "PowerDetails - fillRegTab",
+					"lvl1": "Build history fetched -> " + me.confLoader.getApiURL() + '/boot/regression-by-id/' + getUrlVars('id'),
+					"lvl2": function() {
+						console.log("Build history fetched -> " + me.confLoader.getApiURL() + '/boot/regression-by-id/' + getUrlVars('id'));
+						console.log(data);
+					}
+				});
 				$('#prevZone').html('');
 				$('#previousBuildTitle').append(' (' + data.count + ')');
 				$.each(data.result, function(i, elem) {
@@ -224,6 +254,15 @@ var PowerDetails = {
 			dataType: 'html',
 			url: this.confLoader.getStorageURL() + '/attachments/' + elem.data + '/' + elem.filename,
 			success: function(csv) {
+				debug({
+					"ref": me.confLoader,
+					"from": "PowerDetails - showAsGraph",
+					"lvl1": "CSV chart built -> " + me.confLoader.getStorageURL() + '/attachments/' + elem.data + '/' + elem.filename,
+					"lvl4": function() {
+						console.log("CSV chart built -> " + me.confLoader.getStorageURL() + '/attachments/' + elem.data + '/' + elem.filename);
+						console.log(csv);
+					}
+				});
 				$('#prevTable').prepend('<tr> <td class="text-center">Current build &nbsp;<i class="fa fa-arrow-right"></i></td><td class="currentBuild" id="pmin_' + unused + '"></td><td class="currentBuild" id="pavg_' + unused + '"></td><td class="currentBuild" id="pmax_' + unused + '"></td><td  class="currentBuild" id="cmin_' + unused + '"></td><td class="currentBuild" id="cmax_' + unused + '"></td><td class="currentBuild" id="vmax_' + unused + '"></td><td  class="currentBuild" id="nrj_' + unused + '"></td>');
 				$('#graphContainer').append('<div class="col-lg-12"><div id="dynamic-' + unused + '" class="panel panel-flat"><div class="panel-heading"><h5 class="panel-title"><b>Boards/lab chart</b></h5><div class="heading-elements"></div></div><div class="panel-body"><div class="container-fluid"><div class="row"><center><div class="chartLoading text-center"><br><br><br><br><br><br><h1>Loading ...</h1></div><div class="chart" id="chart-' + unused + '"></div><br><div style="width:50%" id="slider-threshold" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><span style="position:absolute;left:0px;top:7px"><b>Coarse (fast)</b></span> <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 0.080032%;"></a><span style="position:absolute;right:0px;top:7px"><b>Fine (slow)</b></span></div><span id="sliderVal"></span> buckets</center><br></div></div></div></div></div>');
 				$('.chartLoading').hide();
@@ -341,6 +380,15 @@ var PowerDetails = {
 				});
 			}
 			maxLines = lineNo;
+		});
+		debug({
+			"ref": me.confLoader,
+			"from": "PowerDetails - ParseCSV",
+			"lvl1": "CSV parsed",
+			"lvl2": function() {
+				console.log("CSV Parsed");
+				console.log(Array(options, maxLines));
+			}
 		});
 		return Array(options, maxLines);
 	},
