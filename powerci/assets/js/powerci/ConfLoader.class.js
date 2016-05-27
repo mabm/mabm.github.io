@@ -5,7 +5,6 @@ var ConfLoader = {
     apiURL: null,
     storageURL: null,
     appVersion: null,
-    debug: false,
 
     /* Init method */
     load: function(file) {
@@ -38,32 +37,7 @@ var ConfLoader = {
                 me.appVersion = data.appVersion;
             else
                 throw new Exception("App Version (appVersion) not found into config file.");
-            if (data.debugLevel)
-                me.debugLevel = data.debugLevel;
-            else
-                throw new Exception("Debug Level (debugLevel) not found into config file.");
-            debug({
-                "ref": me,
-                "from": "ConfLoader",
-                "lvl1": "Config file loaded successfully",
-                "lvl2": function() {
-                    var output = "Config file loaded successfully :\n\n";
-
-                    output += "- Token API : " + me.apiToken;  
-                    output += "\n- LAVA URL : " + me.lavaBaseURL;
-                    output += "\n- API URL : " + me.apiURL;
-                    output += "\n- Storage URL : " + me.storageURL;
-                    output += "\n- App version : " + me.appVersion;
-                    output += "\n- Debug level : " + me.debugLevel;                  
-                    return (output);
-                }
-            });
         }).fail(function() {
-            debug({
-                "ref": me,
-                "from": "ConfLoader",
-                "lvl1": "Config file not found .."
-            });
             throw new Exception("File '" + file + "' not found.");
         });
 
@@ -85,8 +59,5 @@ var ConfLoader = {
     },
     getAppVersion: function() {
         return this.appVersion;
-    },
-    getDebugLevel: function() {
-        return this.debugLevel;
     }
 }
