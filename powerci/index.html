@@ -46,7 +46,7 @@
 	<script type="text/javascript" src="assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
 	<script type="text/javascript" src="assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>
-	<script src="http://code.highcharts.com/highcharts.js"></script>
+	<script src="http://code.highcharts.com/stock/highstock.js"></script>
 	<script src="http://code.highcharts.com/modules/exporting.js"></script>
 	<!-- optional -->
 	<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
@@ -83,6 +83,7 @@
 	<div class="fixedElem text-center">
 		<span id="fixed1">0/0 loaded</span> loaded<br><span id="fixed2">0%</span>
 	</div>
+	<a href="#" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up"></i></a>
 	<div id="deleteProfil" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -136,8 +137,8 @@
 						<li><a href="#" id="resetAllButton"><i class="fa fa-eraser"></i> Reset all</a></li>
 					</ul>
 				</li>
-				<div class="navbar-brand">
-					Version 0.01
+				<div class="navbar-brand" id="versionLabel">
+					Version X.XX
 				</div>
 			</div>
 		</div>
@@ -237,7 +238,7 @@
 				<div class="row" id="allMainContent">
 					<div class="col-lg-12">
 						<div class="panel panel-flat" id="firstBloc">
-							<div class="panel-body">
+							<div class="panel-body" style="font-size: x-small;">
 								<div class="container-fluid">
 									<div class="col-lg-12 masonry-container">
 										<div class="col-lg-6">
@@ -265,7 +266,6 @@
 														<select field="job" id="select-job" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
 
 														</select>
-														<button id="compareBtn-job" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
 													</div>
 												</div>
 											</div>
@@ -276,7 +276,6 @@
 														<select field="kernel" id="select-kernels" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
 
 														</select>
-														<button id="compareBtn-kernel" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
 													</div>
 												</div>
 											</div>
@@ -287,7 +286,6 @@
 														<select field="arch" id="select-archs" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
 
 														</select>
-														<button id="compareBtn-arch" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
 													</div>
 												</div>
 											</div>
@@ -300,7 +298,6 @@
 														<select field="defconfig_full" id="select-defconfigs" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
 
 														</select>
-														<button id="compareBtn-defconfig_full" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
 													</div>
 												</div>
 											</div>
@@ -311,7 +308,6 @@
 														<select field="board" id="select-boards" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
 
 														</select>
-														<button id="compareBtn-board" class="btn btn-primary compareBtn" disabled><i class="fa fa-bar-chart"></i></button>
 													</div>
 												</div>
 											</div>
@@ -352,7 +348,6 @@
 														<select field="test_desc" id="select-test_desc" multiple="" style="width:100%" data-placeholder="Enter tags" class="select2 select-icons" tabindex="-1">
 															
 														</select>
-														<button id="compareBtn-test_desc" class="btn btn-primary compareBtn"><i class="fa fa-bar-chart"></i></button>
 													</div>
 												</div>
 											</div>
@@ -362,6 +357,7 @@
 										<br>
 										<button id="searchBtn" class="btn btn-lg btn-success"><i class="fa fa-refresh"></i> Search</button>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="compareBtn" class="btn btn-primary compareBtn"><i class="fa fa-bar-chart"></i></button>
 										<button id="nestedBtn" class="btn btn-default" disabled>Nested view</button>
 									</div>
 								</div>
@@ -372,7 +368,7 @@
 
 						<!-- Traffic sources -->
 						<div class="panel panel-flat">
-							<div class="panel-body">
+							<div class="panel-body" style="font-size: x-small;">
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col-lg-12">
@@ -442,8 +438,8 @@
 
 		</div>
 		<!-- /page container -->
-
-	</body>
+	</div>
+</body>
 
 <script>
 	$(document).ready(function() {
